@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/screens/sign_in_screen.dart';
 
 import '../../utils/color_palette.dart';
 import '../buttons/link_button.dart';
