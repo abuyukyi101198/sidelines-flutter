@@ -20,8 +20,11 @@ class SignInScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  const SizedBox(
+                    height: 128,
+                  ),
                   SvgPicture.asset(
                     'assets/logo.svg',
                     width: 128,
@@ -33,13 +36,7 @@ class SignInScreen extends StatelessWidget {
                   const PasswordField(),
                   const ForgotPasswordLinkButton(),
                   const SignInButton(),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   const OrDivider(),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   const SignInWithGoogleButton(),
                   const SizedBox(
                     height: 8,
