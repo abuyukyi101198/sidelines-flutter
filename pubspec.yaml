@@ -92,6 +92,8 @@ flutter:
 
   assets:
     - assets/logo.svg
+    - assets/google.svg
+    - assets/apple.svg
 
   fonts:
     - family: Sharp Grotesk
