@@ -5,9 +5,6 @@ class SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: () {},
-      child: const Text('Sign in')
-    );
+    return FilledButton(onPressed: () {}, child: const Text('Sign in'));
   }
 }

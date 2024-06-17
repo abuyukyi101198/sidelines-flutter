@@ -15,15 +15,14 @@ class SecondaryFilledButton extends StatelessWidget {
   final Widget child;
   final Widget? icon;
 
-  static final ButtonStyle _defaultSecondaryButtonStyle = FilledButton.styleFrom(
-      foregroundColor: ColorPalette.textColor,
-      backgroundColor: ColorPalette.secondaryColor,
-      textStyle: const TextStyle(
-          fontFamily: 'Sharp Grotesk',
-          fontWeight: FontWeight.normal,
-          fontSize: 12
-      )
-  );
+  static final ButtonStyle _defaultSecondaryButtonStyle =
+      FilledButton.styleFrom(
+          foregroundColor: ColorPalette.textColor,
+          backgroundColor: ColorPalette.secondaryColor,
+          textStyle: const TextStyle(
+              fontFamily: 'Sharp Grotesk',
+              fontWeight: FontWeight.normal,
+              fontSize: 12));
 
   const SecondaryFilledButton({
     required this.onPressed,

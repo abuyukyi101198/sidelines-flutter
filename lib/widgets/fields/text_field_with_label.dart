@@ -12,8 +12,7 @@ class TextFieldWithLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle labelStyle =
-        TextStyle(color: ColorPalette.textColor);
+    const TextStyle labelStyle = TextStyle(color: ColorPalette.textColor);
     const TextStyle fieldStyle =
         TextStyle(color: ColorPalette.textColor, fontSize: 12, height: 1.0);
     InputDecoration decoration = InputDecoration(

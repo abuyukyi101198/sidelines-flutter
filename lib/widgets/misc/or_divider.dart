@@ -10,8 +10,7 @@ class OrDivider extends StatelessWidget {
     return Row(children: <Widget>[
       Expanded(
         child: Container(
-            margin: const EdgeInsets.only(right: 20),
-            child: const Divider()),
+            margin: const EdgeInsets.only(right: 20), child: const Divider()),
       ),
       const Text(
         "or",
@@ -19,8 +18,7 @@ class OrDivider extends StatelessWidget {
       ),
       Expanded(
         child: Container(
-            margin: const EdgeInsets.only(left: 20),
-            child: const Divider()),
+            margin: const EdgeInsets.only(left: 20), child: const Divider()),
       ),
     ]);
   }

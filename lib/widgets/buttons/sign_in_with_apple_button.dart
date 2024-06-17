@@ -9,9 +9,7 @@ class SignInWithAppleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SecondaryFilledButton(
       onPressed: () {},
-      icon: SvgPicture.asset(
-        'assets/apple.svg'
-      ),
+      icon: SvgPicture.asset('assets/apple.svg'),
       child: const Text('Sign in with Apple'),
     );
   }

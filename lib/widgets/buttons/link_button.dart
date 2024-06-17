@@ -12,25 +12,25 @@ class LinkButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        overlayColor: WidgetStateProperty.resolveWith((states) => Colors.transparent),
+        overlayColor:
+            WidgetStateProperty.resolveWith((states) => Colors.transparent),
         padding: WidgetStateProperty.all(EdgeInsets.zero),
         alignment: Alignment.centerLeft,
         textStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.pressed)) {
             return const TextStyle(
-              decoration: TextDecoration.underline,
-              decorationThickness: 2
-            );
+                decoration: TextDecoration.underline, decorationThickness: 2);
           }
           return null;
         }),
       ),
-      child: Text(label, style: const TextStyle(
-        color: ColorPalette.primaryColor,
-        fontFamily: 'Sharp Grotesk',
-        fontSize: 12,
-        fontWeight: FontWeight.w700,
-      )),
+      child: Text(label,
+          style: const TextStyle(
+            color: ColorPalette.primaryColor,
+            fontFamily: 'Sharp Grotesk',
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          )),
     );
   }
 }
