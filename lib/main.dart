@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sidelines/utils/color_palette.dart';
-import 'package:sidelines/widgets/email_field.dart';
-import 'package:sidelines/widgets/link_button.dart';
-import 'package:sidelines/widgets/password_field.dart';
+import 'package:sidelines/widgets/buttons/sign_in_button.dart';
+import 'package:sidelines/widgets/buttons/sign_in_with_apple_button.dart';
+import 'package:sidelines/widgets/buttons/sign_in_with_google_button.dart';
+import 'package:sidelines/widgets/fields/email_field.dart';
+import 'package:sidelines/widgets/buttons/link_button.dart';
+import 'package:sidelines/widgets/fields/password_field.dart';
+import 'package:sidelines/widgets/misc/or_divider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +33,16 @@ class MyApp extends StatelessWidget {
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                   textStyle: const TextStyle(
-                      fontFamily: 'Sharp Grotesk', fontSize: 12)))),
+                      fontFamily: 'Sharp Grotesk', fontSize: 12))),
+          filledButtonTheme: FilledButtonThemeData(
+              style: FilledButton.styleFrom(
+                  foregroundColor: ColorPalette.backgroundColor,
+                  backgroundColor: ColorPalette.primaryColor,
+                  textStyle: const TextStyle(
+                      fontFamily: 'Sharp Grotesk',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12))),
+          dividerColor: ColorPalette.textColor),
       home: const SignInScreen(),
     );
   }
@@ -45,14 +58,15 @@ class SignInScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SvgPicture.asset(
                   'assets/logo.svg',
-                  width: 150,
+                  width: 128,
                 ),
                 const SizedBox(
-                  height: 60,
+                  height: 54,
                 ),
                 const EmailField(),
                 const PasswordField(),
@@ -60,8 +74,21 @@ class SignInScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: LinkButton(label: 'Forgot password?')),
                 const SizedBox(
+                  height: 8,
+                ),
+                const SignInButton(),
+                const SizedBox(
                   height: 20,
                 ),
+                const OrDivider(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SignInWithGoogleButton(),
+                const SizedBox(
+                  height: 8,
+                ),
+                const SignInWithAppleButton(),
               ]),
         ),
       ),

@@ -37,7 +37,7 @@ class TextFieldWithLabel extends StatelessWidget {
             cursorColor: ColorPalette.textColor,
             decoration: decoration),
         const SizedBox(
-          height: 20,
+          height: 12,
         ),
       ],
     );
