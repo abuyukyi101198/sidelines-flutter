@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sidelines/widgets/text_field_with_label.dart';
+import 'package:sidelines/widgets/fields/text_field_with_label.dart';
 
 class EmailField extends StatelessWidget {
   const EmailField({super.key});

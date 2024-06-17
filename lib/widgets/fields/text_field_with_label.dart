@@ -15,7 +15,7 @@ class TextFieldWithLabel extends StatelessWidget {
     const TextStyle labelStyle =
         TextStyle(color: ColorPalette.textColor);
     const TextStyle fieldStyle =
-        TextStyle(color: Colors.white, fontSize: 12, height: 1.0);
+        TextStyle(color: ColorPalette.textColor, fontSize: 12, height: 1.0);
     InputDecoration decoration = InputDecoration(
         filled: true,
         fillColor: ColorPalette.secondaryColor,
