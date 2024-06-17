@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sidelines/utils/color_palette.dart';
+import 'package:sidelines/widgets/buttons/forgot_password_link_button.dart';
 import 'package:sidelines/widgets/buttons/sign_in_button.dart';
 import 'package:sidelines/widgets/buttons/sign_in_with_apple_button.dart';
 import 'package:sidelines/widgets/buttons/sign_in_with_google_button.dart';
@@ -70,12 +71,7 @@ class SignInScreen extends StatelessWidget {
                 ),
                 const EmailField(),
                 const PasswordField(),
-                const Align(
-                    alignment: Alignment.centerRight,
-                    child: LinkButton(label: 'Forgot password?')),
-                const SizedBox(
-                  height: 8,
-                ),
+                const ForgotPasswordLinkButton(),
                 const SignInButton(),
                 const SizedBox(
                   height: 20,
@@ -88,9 +84,19 @@ class SignInScreen extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                const SignInWithAppleButton(),
+                const SignInWithAppleButton()
               ]),
         ),
+      ),
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('Don\'t have an account?', style: TextStyle(color: ColorPalette.textColor),),
+          const SizedBox(
+            width: 4,
+          ),
+          LinkButton(onPressed: (){}, label: 'Sign up')
+        ],
       ),
     );
   }
