@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/screens/sign_in_screen.dart';
 
 import '../../utils/color_palette.dart';
 import '../buttons/link_button.dart';
 
 class SignUpFooter extends StatelessWidget {
   const SignUpFooter({super.key});
+
+  void onPressed(context) {
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,11 @@ class SignUpFooter extends StatelessWidget {
         const SizedBox(
           width: 4,
         ),
-        LinkButton(onPressed: () {}, label: 'Sign in')
+        LinkButton(
+            onPressed: () {
+              onPressed(context);
+            },
+            label: 'Sign in')
       ],
     );
   }
