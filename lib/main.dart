@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/screens/matches_screen.dart';
 import 'package:sidelines/screens/sign_in_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 
@@ -20,6 +21,10 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Sharp Grotesk',
           primaryColor: ColorPalette.primaryColor,
           scaffoldBackgroundColor: ColorPalette.backgroundColor,
+          appBarTheme: const AppBarTheme(
+            color: ColorPalette.backgroundColor,
+            foregroundColor: ColorPalette.textColor,
+          ),
           textTheme: const TextTheme(
             bodyMedium: TextStyle(fontSize: 12),
           ),
@@ -35,8 +40,10 @@ class MyApp extends StatelessWidget {
                       fontFamily: 'Sharp Grotesk',
                       fontWeight: FontWeight.w700,
                       fontSize: 12))),
-          dividerColor: ColorPalette.textColor),
-      home: const SignInScreen(),
+          dividerColor: ColorPalette.textColor,
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: ColorPalette.backgroundColor)),
+      home: const MatchesScreen(),
     );
   }
 }
