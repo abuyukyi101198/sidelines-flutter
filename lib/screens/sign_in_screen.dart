@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sidelines/widgets/display/sign_in_and_up_logo.dart';
 import '../widgets/buttons/forgot_password_link_button.dart';
 import '../widgets/buttons/sign_in_button.dart';
 import '../widgets/buttons/sign_in_with_apple_button.dart';
@@ -14,37 +15,28 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 128,
-                  ),
-                  SvgPicture.asset(
-                    'assets/logo.svg',
-                    width: 128,
-                  ),
-                  const SizedBox(
-                    height: 54,
-                  ),
-                  const EmailField(),
-                  const PasswordField(),
-                  const ForgotPasswordLinkButton(),
-                  const SignInButton(),
-                  const OrDivider(),
-                  const SignInWithGoogleButton(),
-                  const SizedBox(
+                  SignInAndUpLogo(),
+                  EmailField(),
+                  PasswordField(),
+                  ForgotPasswordLinkButton(),
+                  SignInButton(),
+                  OrDivider(),
+                  SignInWithGoogleButton(),
+                  SizedBox(
                     height: 8,
                   ),
-                  const SignInWithAppleButton()
+                  SignInWithAppleButton()
                 ]),
           ),
         ),
-        bottomNavigationBar: const SignInFooter());
+        bottomNavigationBar: SignInFooter());
   }
 }

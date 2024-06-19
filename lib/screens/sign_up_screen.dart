@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sidelines/widgets/buttons/sign_up_button.dart';
 import 'package:sidelines/widgets/buttons/sign_up_with_apple.dart';
 import 'package:sidelines/widgets/buttons/sign_up_with_google.dart';
+import 'package:sidelines/widgets/display/sign_in_and_up_logo.dart';
 import 'package:sidelines/widgets/fields/password_field.dart';
 import 'package:sidelines/widgets/footers/sign_up_footer.dart';
 import 'package:sidelines/widgets/misc/or_divider.dart';
@@ -14,43 +15,34 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 128,
-                  ),
-                  SvgPicture.asset(
-                    'assets/logo.svg',
-                    width: 128,
-                  ),
-                  const SizedBox(
-                    height: 54,
-                  ),
-                  const EmailField(
+                  SignInAndUpLogo(),
+                  EmailField(
                     label: 'Your e-mail address',
                   ),
-                  const PasswordField(
+                  PasswordField(
                     label: 'Enter a password',
                   ),
-                  const PasswordField(
+                  PasswordField(
                     label: 'Re-enter your password',
                   ),
-                  const SignUpButton(),
-                  const OrDivider(),
-                  const SignUpWithGoogle(),
-                  const SizedBox(
+                  SignUpButton(),
+                  OrDivider(),
+                  SignUpWithGoogle(),
+                  SizedBox(
                     height: 8,
                   ),
-                  const SignUpWithApple()
+                  SignUpWithApple()
                 ]),
           ),
         ),
-        bottomNavigationBar: const SignUpFooter());
+        bottomNavigationBar: SignUpFooter());
   }
 }

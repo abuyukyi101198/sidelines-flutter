@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:sidelines/widgets/misc/versus_icon.dart';
 
-import '../../utils/color_palette.dart';
-
 class UpcomingTimeDisplay extends StatelessWidget {
   final DateTime matchDateTime;
 
