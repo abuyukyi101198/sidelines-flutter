@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
+import 'package:sidelines/widgets/display/upcoming_time_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
 
 class MatchesScreen extends StatelessWidget {
@@ -74,39 +75,7 @@ class MatchesScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      Center(
-                          child: Column(
-                        children: [
-                          const Column(
-                            children: [
-                              Text(
-                                '19:00',
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1),
-                              ),
-                              Text('Tomorrow'),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 8, top: 1, right: 8, bottom: 1),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: ColorPalette.backgroundColor),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: const Text(
-                              'vs',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w700),
-                            ),
-                          )
-                        ],
-                      )),
+                      UpcomingTimeDisplay(matchDateTime: DateTime.now().add(const Duration(days: 2)))
                     ],
                   ))
             ],
