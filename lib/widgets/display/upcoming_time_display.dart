@@ -14,6 +14,29 @@ class UpcomingTimeDisplay extends StatelessWidget {
     matchDateString = _getMatchDate(matchDateTime);
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Column(
+      children: [
+        const SizedBox(
+          height: 8,
+        ),
+        Column(
+          children: [
+            Text(
+              matchHour,
+              style: const TextStyle(
+                  fontSize: 32, fontWeight: FontWeight.w700, height: 1),
+            ),
+            Text(matchDateString),
+          ],
+        ),
+        const VersusIcon(),
+      ],
+    ));
+  }
+
   String _getMatchDate(DateTime matchDateTime) {
     DateTime today = DateTime.now();
     int numberOfDaysFromMatchDay =
@@ -27,25 +50,5 @@ class UpcomingTimeDisplay extends StatelessWidget {
       return DateFormat.EEEE().format(matchDateTime);
     }
     return DateFormat.Md().format(matchDateTime);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      children: [
-        Column(
-          children: [
-            Text(
-              matchHour,
-              style: const TextStyle(
-                  fontSize: 28, fontWeight: FontWeight.w700, height: 1),
-            ),
-            Text(matchDateString),
-          ],
-        ),
-        const VersusIcon(),
-      ],
-    ));
   }
 }
