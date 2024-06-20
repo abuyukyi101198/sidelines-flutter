@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
+import 'package:sidelines/widgets/display/upcoming_team_display.dart';
 import 'package:sidelines/widgets/display/upcoming_time_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
 
@@ -32,50 +33,24 @@ class MatchesScreen extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            children: [
-                              Center(
-                                child: CircleAvatar(
-                                  radius: 36,
-                                  foregroundImage: NetworkImage(
-                                      'https://cdn.dribbble.com/users/1341408/screenshots/16441374/media/bfa8046d1062a3abe131eefe64653f59.jpg?resize=1600x1200&vertical=center'),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                'Tarkington',
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              )
-                            ],
+                          UpcomingTeamDisplay(
+                            teamName: 'Tarkington',
+                            teamBadgeUrl:
+                                'https://cdn.dribbble.com/users/1341408/screenshots/16441374/media/bfa8046d1062a3abe131eefe64653f59.jpg?resize=1600x1200&vertical=center',
                           ),
-                          Column(
-                            children: [
-                              Center(
-                                child: CircleAvatar(
-                                  radius: 36,
-                                  foregroundImage: NetworkImage(
-                                      'https://cdn.dribbble.com/userupload/4247758/file/original-b54882b8a6d01145e2792fa80104ba3e.jpg?resize=2048x1536'),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                'Hillenbrand',
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          )
+                          UpcomingTeamDisplay(
+                            teamName: 'Hillenbrand',
+                            teamBadgeUrl:
+                            'https://cdn.dribbble.com/userupload/4247758/file/original-b54882b8a6d01145e2792fa80104ba3e.jpg?resize=2048x1536',
+                          ),
                         ],
                       ),
-                      UpcomingTimeDisplay(matchDateTime: DateTime.now().add(const Duration(days: 2)))
+                      UpcomingTimeDisplay(
+                          matchDateTime:
+                              DateTime.now().add(const Duration(days: 2)))
                     ],
                   ))
             ],
