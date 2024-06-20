@@ -13,13 +13,16 @@ class VersusIcon extends StatelessWidget {
           height: 20,
         ),
         Container(
-          padding: const EdgeInsets.only(left: 8, top: 1, right: 8, bottom: 1),
+          padding: const EdgeInsets.only(
+            left: 8,
+            right: 8,
+          ),
           decoration: BoxDecoration(
               border: Border.all(color: ColorPalette.backgroundColor),
               borderRadius: BorderRadius.circular(12)),
           child: const Text(
             'vs',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
           ),
         )
       ],
