@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sidelines/widgets/buttons/sign_up_button.dart';
 import 'package:sidelines/widgets/buttons/sign_up_with_apple.dart';
 import 'package:sidelines/widgets/buttons/sign_up_with_google.dart';

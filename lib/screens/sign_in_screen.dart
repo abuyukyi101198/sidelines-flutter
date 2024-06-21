@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sidelines/widgets/display/sign_in_and_up_logo.dart';
 import '../widgets/buttons/forgot_password_link_button.dart';
 import '../widgets/buttons/sign_in_button.dart';
