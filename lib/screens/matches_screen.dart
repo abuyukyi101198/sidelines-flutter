@@ -59,7 +59,7 @@ class MatchesScreen extends StatelessWidget {
                                   radius: 24,
                                 ),
                                 TeamBadge(
-                                  teamName: 'Wiley',
+                                  teamBadgeUrl: 'https://cdn.dribbble.com/users/3499911/screenshots/18302233/media/5c850ae6b3792008f3ea4b816cb58fc7.jpg?resize=1600x1200&vertical=center',
                                     radius: 24
                                 )
                               ],
@@ -70,14 +70,14 @@ class MatchesScreen extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Hillenbrand',),
+                                    Text('Derby City',),
                                     Text('1')
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Wiley',),
+                                    Text('Sogra Orc Dos',),
                                     Text('0')
                                   ],
                                 )

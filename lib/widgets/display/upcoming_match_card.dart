@@ -23,12 +23,12 @@ class UpcomingMatchCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 UpcomingTeamDisplay(
-                  teamName: 'Tarkington',
+                  teamName: 'Club Internacional de Futbol',
                   teamBadgeUrl:
                       'https://cdn.dribbble.com/users/1341408/screenshots/16441374/media/bfa8046d1062a3abe131eefe64653f59.jpg?resize=1600x1200&vertical=center',
                 ),
                 UpcomingTeamDisplay(
-                  teamName: 'Hillenbrand',
+                  teamName: 'Derby City',
                   teamBadgeUrl:
                       'https://cdn.dribbble.com/userupload/4247758/file/original-b54882b8a6d01145e2792fa80104ba3e.jpg?resize=2048x1536',
                 ),
