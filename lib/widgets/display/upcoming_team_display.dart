@@ -13,17 +13,21 @@ class UpcomingTeamDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(child: teamBadge),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          teamName,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-        )
-      ],
+    return SizedBox(
+      width: 105,
+      child: Column(
+        children: [
+          Center(child: teamBadge),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            teamName,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
     );
   }
 }
