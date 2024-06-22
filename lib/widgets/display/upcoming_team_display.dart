@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/widgets/display/team_badge.dart';
 
 class UpcomingTeamDisplay extends StatelessWidget {
   final String teamName;
   final String? teamBadgeUrl;
 
-  late final CircleAvatar teamBadge;
+  late final TeamBadge teamBadge;
 
   UpcomingTeamDisplay({super.key, required this.teamName, this.teamBadgeUrl}) {
-    if (teamBadgeUrl != null) {
-      teamBadge = CircleAvatar(
-        radius: 36,
-        foregroundImage: NetworkImage(teamBadgeUrl!),
-      );
-    } else {
-      teamBadge = CircleAvatar(
-        radius: 36,
-        backgroundColor: _generateTeamColor(teamName),
-      );
-    }
+    teamBadge = TeamBadge(teamName: teamName, teamBadgeUrl: teamBadgeUrl, radius: 36);
   }
 
   @override
@@ -34,15 +25,5 @@ class UpcomingTeamDisplay extends StatelessWidget {
         )
       ],
     );
-  }
-
-  Color _generateTeamColor(String input) {
-    int hash = 0;
-    for (int i = 0; i < input.length; i++) {
-      hash = input.codeUnitAt(i) + ((hash << 5) - hash);
-    }
-
-    String hexColor = (hash & 0xFFFFFF).toRadixString(16).padLeft(6, '0');
-    return Color(int.parse("FF$hexColor", radix: 16));
   }
 }
