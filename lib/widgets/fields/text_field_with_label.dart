@@ -4,11 +4,15 @@ import 'package:sidelines/utils/color_palette.dart';
 class TextFieldWithLabel extends StatelessWidget {
   final String label;
   final TextInputType textInputType;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   const TextFieldWithLabel(
       {super.key,
       required this.label,
-      this.textInputType = TextInputType.text});
+      this.textInputType = TextInputType.text,
+      this.controller,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,9 @@ class TextFieldWithLabel extends StatelessWidget {
         const SizedBox(
           height: 4,
         ),
-        TextField(
+        TextFormField(
+            controller: controller,
+            validator: validator,
             style: fieldStyle,
             keyboardType: textInputType,
             cursorColor: ColorPalette.textColor,
