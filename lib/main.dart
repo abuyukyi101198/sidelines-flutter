@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/screens/matches_screen.dart';
+import 'package:sidelines/screens/sign_in_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 
 void main() {
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           dividerColor: ColorPalette.textColor,
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: ColorPalette.backgroundColor)),
-      home: const MatchesScreen(),
+      home: const SignInScreen(),
     );
   }
 }
