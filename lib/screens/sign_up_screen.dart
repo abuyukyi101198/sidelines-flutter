@@ -30,18 +30,6 @@ class SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void _signUp() {
-    if (_formKey.currentState!.validate()) {
-      final email = _emailController.text.trim();
-      final password = _passwordController.text.trim();
-
-      // TODO: Implement API call using the captured email and password
-      // Example: Call the sign-up function and pass the email and password
-
-      // After successful sign-up, navigate to the desired screen
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +55,10 @@ class SignUpScreenState extends State<SignUpScreen> {
                       label: 'Re-enter your password',
                       controller: _confirmPasswordController,
                     ),
-                    SignUpButton(onPressed: _signUp),
+                    SignUpButton(
+                      emailController: _emailController,
+                      passwordController: _passwordController,
+                    ),
                     const OrDivider(),
                     const SignUpWithGoogle(),
                     const SizedBox(
