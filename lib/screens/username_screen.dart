@@ -19,8 +19,7 @@ class UsernameScreen extends StatelessWidget {
                   'Choose a username',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
                   ),
                 ),
                 SizedBox(
