@@ -54,14 +54,18 @@ class SetupJourneyState extends State<SetupJourney> {
         ],
       ),
       bottomNavigationBar: NextBottomButton(
-        onPressed: _isUsernameValid
-            ? () {
-          _pageController.nextPage(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-          );
-        }
-            : null,
+        onPressed: () {
+          if (_pageController.page?.round() == 1 && !_isUsernameValid) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Please enter a unique username')),
+            );
+          } else {
+            _pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          }
+        },
       ),
     );
   }
