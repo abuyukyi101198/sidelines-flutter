@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sidelines/data/constants.dart';
 
+import '../../data/storage.dart';
 import '../alerts/notification_bar.dart';
 
 class SignInButton extends StatelessWidget {
@@ -37,6 +38,7 @@ class SignInButton extends StatelessWidget {
             if (!context.mounted) return;
             if (response.statusCode == 200) {
               Navigator.pushReplacementNamed(context, '/matches');
+              await Storage().write('token', jsonDecode(response.body)['token']);
             } else {
               final Map<String, dynamic> responseData =
               json.decode(response.body);

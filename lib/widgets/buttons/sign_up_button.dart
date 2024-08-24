@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:sidelines/data/constants.dart';
 import 'package:sidelines/widgets/alerts/notification_bar.dart';
 
+import '../../data/storage.dart';
+
 class SignUpButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -43,6 +45,7 @@ class SignUpButton extends StatelessWidget {
           if (!context.mounted) return;
           if (response.statusCode == 201) {
             Navigator.pushReplacementNamed(context, '/setup-journey');
+            await Storage().write('token', jsonDecode(response.body)['token']);
           } else {
             final Map<String, dynamic> responseData =
                 json.decode(response.body);
