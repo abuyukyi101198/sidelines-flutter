@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/data/storage.dart';
+import 'package:sidelines/screens/welcome_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/buttons/next_bottom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -57,6 +58,7 @@ class SetupJourneyState extends State<SetupJourney> {
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
+              const WelcomeScreen(),
               UsernameScreen(usernameController: _usernameController),
               const PersonalInfoScreen(),
             ],
@@ -65,7 +67,7 @@ class SetupJourneyState extends State<SetupJourney> {
       ),
       bottomNavigationBar: NextBottomButton(
         onPressed: () async {
-          if (_pageController.page?.round() == 0) {
+          if (_pageController.page?.round() == 1) {
             bool isUsernameValid = await _checkUsernameValidity(_usernameController.text);
             if (!isUsernameValid) {
               ScaffoldMessenger.of(context).showSnackBar(
