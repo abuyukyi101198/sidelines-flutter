@@ -15,6 +15,13 @@ class SetupJourney extends StatefulWidget {
 
 class SetupJourneyState extends State<SetupJourney> {
   final PageController _pageController = PageController();
+  bool _isUsernameValid = false;
+
+  void _updateUsernameValidity(bool isValid) {
+    setState(() {
+      _isUsernameValid = isValid;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +43,26 @@ class SetupJourneyState extends State<SetupJourney> {
       body: Stack(
         children: [
           PageView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
-            children: const [
-              WelcomeScreen(),
-              UsernameScreen(),
-              PersonalInfoScreen(),
+            children: [
+              const WelcomeScreen(),
+              UsernameScreen(onUsernameValid: _updateUsernameValidity),
+              const PersonalInfoScreen(),
             ],
           ),
         ],
       ),
       bottomNavigationBar: NextBottomButton(
-          onPressed: () {
-            _pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          },
-        ),
-      );
+        onPressed: _isUsernameValid
+            ? () {
+          _pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        }
+            : null,
+      ),
+    );
   }
 }
