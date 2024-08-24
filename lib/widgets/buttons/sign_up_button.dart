@@ -44,7 +44,10 @@ class SignUpButton extends StatelessWidget {
               await signUp(emailController.text, passwordController.text);
           if (!context.mounted) return;
           if (response.statusCode == 201) {
-            Navigator.pushReplacementNamed(context, '/setup-journey');
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              '/setup-journey',
+              (Route<dynamic> route) => false,
+            );
             await Storage().write('token', jsonDecode(response.body)['token']);
           } else {
             final Map<String, dynamic> responseData =
