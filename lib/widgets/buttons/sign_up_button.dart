@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sidelines/data/constants.dart';
+import 'package:sidelines/widgets/alerts/notification_bar.dart';
 
 class SignUpButton extends StatelessWidget {
   final TextEditingController emailController;
@@ -22,23 +23,17 @@ class SignUpButton extends StatelessWidget {
         if (emailController.text.isEmpty ||
             passwordController.text.isEmpty ||
             confirmPasswordController.text.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Please fill all fields')),
-          );
+          NotificationBar.show(context, 'Please fill all fields');
           return;
         }
 
         if (!isValidEmail(emailController.text)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Please enter a valid email address')),
-          );
+          NotificationBar.show(context, 'Please enter a valid email address');
           return;
         }
 
         if (passwordController.text != confirmPasswordController.text) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Passwords do not match')),
-          );
+          NotificationBar.show(context, 'Passwords do not match');
           return;
         }
 
@@ -53,15 +48,11 @@ class SignUpButton extends StatelessWidget {
                 json.decode(response.body);
             final errorMessage =
                 responseData['detail'] ?? 'Signup failed. Please try again.';
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(errorMessage)),
-            );
+            NotificationBar.show(context, errorMessage);
           }
         } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('An error occurred. Please try again later.')),
-          );
+          NotificationBar.show(
+              context, 'An error occurred. Please try again later.');
         }
       },
       child: const Text('Sign up'),
