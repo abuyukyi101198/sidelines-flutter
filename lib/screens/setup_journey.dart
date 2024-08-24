@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/screens/welcome_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/buttons/next_bottom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -46,7 +45,6 @@ class SetupJourneyState extends State<SetupJourney> {
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
-              const WelcomeScreen(),
               UsernameScreen(onUsernameValid: _updateUsernameValidity),
               const PersonalInfoScreen(),
             ],
@@ -55,7 +53,7 @@ class SetupJourneyState extends State<SetupJourney> {
       ),
       bottomNavigationBar: NextBottomButton(
         onPressed: () {
-          if (_pageController.page?.round() == 1 && !_isUsernameValid) {
+          if (_pageController.page?.round() == 0 && !_isUsernameValid) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Please enter a unique username')),
             );
