@@ -23,7 +23,7 @@ class UsernameScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 4,
+                  height: 12,
                 ),
                 Text(
                   'Having a username will help your friends to find your profile.',
@@ -33,7 +33,7 @@ class UsernameScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 36,
                 ),
                 UsernameField(),
               ]),
