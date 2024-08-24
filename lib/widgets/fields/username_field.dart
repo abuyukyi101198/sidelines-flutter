@@ -4,6 +4,7 @@ import 'package:sidelines/widgets/fields/text_field_with_label.dart';
 class UsernameField extends StatelessWidget {
   final String? label;
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
 
   final String _defaultLabel = 'Username';
 
@@ -11,6 +12,7 @@ class UsernameField extends StatelessWidget {
     super.key,
     this.label,
     this.controller,
+    this.onChanged,
   });
 
   @override
@@ -19,7 +21,8 @@ class UsernameField extends StatelessWidget {
     return TextFieldWithLabel(
       label: effectiveLabel,
       controller: controller,
-      textInputType: TextInputType.text
+      textInputType: TextInputType.text,
+      onChanged: onChanged,
     );
   }
 }
