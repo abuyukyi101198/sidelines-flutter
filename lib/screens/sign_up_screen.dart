@@ -58,6 +58,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     SignUpButton(
                       emailController: _emailController,
                       passwordController: _passwordController,
+                      confirmPasswordController: _confirmPasswordController,
                     ),
                     const OrDivider(),
                     const SignUpWithGoogle(),

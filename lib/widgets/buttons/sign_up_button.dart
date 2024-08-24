@@ -6,20 +6,38 @@ import 'package:sidelines/data/constants.dart';
 class SignUpButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
 
   const SignUpButton({
     super.key,
     required this.emailController,
     required this.passwordController,
+    required this.confirmPasswordController,
   });
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: () async {
-        if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+        if (emailController.text.isEmpty ||
+            passwordController.text.isEmpty ||
+            confirmPasswordController.text.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Please fill all fields')),
+          );
+          return;
+        }
+
+        if (!isValidEmail(emailController.text)) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Please enter a valid email address')),
+          );
+          return;
+        }
+
+        if (passwordController.text != confirmPasswordController.text) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Passwords do not match')),
           );
           return;
         }
@@ -58,5 +76,12 @@ class SignUpButton extends StatelessWidget {
     );
 
     return response;
+  }
+
+  bool isValidEmail(String email) {
+    final regex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return regex.hasMatch(email);
   }
 }
