@@ -9,33 +9,60 @@ import '../widgets/fields/password_field.dart';
 import '../widgets/footers/sign_in_footer.dart';
 import '../widgets/misc/or_divider.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
   @override
+  SignInScreenState createState() => SignInScreenState();
+}
+
+class SignInScreenState extends State<SignInScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: Center(
           child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  SignInAndUpLogo(),
-                  EmailField(),
-                  PasswordField(),
-                  ForgotPasswordLinkButton(),
-                  SignInButton(),
-                  OrDivider(),
-                  SignInWithGoogleButton(),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  SignInWithAppleButton()
-                ]),
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    const SignInAndUpLogo(),
+                    EmailField(
+                      label: 'Username/E-mail',
+                      controller: _emailController,
+                    ),
+                    PasswordField(
+                      controller: _passwordController,
+                    ),
+                    const ForgotPasswordLinkButton(),
+                    SignInButton(
+                      emailController: _emailController,
+                      passwordController: _passwordController,
+                    ),
+                    const OrDivider(),
+                    const SignInWithGoogleButton(),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SignInWithAppleButton()
+                  ]),
+            ),
           ),
         ),
-        bottomNavigationBar: SignInFooter());
+        bottomNavigationBar: const SignInFooter());
   }
 }

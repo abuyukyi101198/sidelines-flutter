@@ -47,7 +47,7 @@ class SignUpButton extends StatelessWidget {
             final Map<String, dynamic> responseData =
                 json.decode(response.body);
             final errorMessage =
-                responseData['detail'] ?? 'Signup failed. Please try again.';
+                responseData['detail'] ?? 'Sign up failed. Please try again.';
             NotificationBar.show(context, errorMessage);
           }
         } catch (e) {
