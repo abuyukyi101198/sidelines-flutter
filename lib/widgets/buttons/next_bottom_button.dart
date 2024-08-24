@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class NextBottomButton extends StatelessWidget {
   final String? text;
+  final void Function()? onPressed;
 
   final String _defaultText = 'Next';
 
-  const NextBottomButton({super.key, this.text});
+  const NextBottomButton({super.key, this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class NextBottomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
           children: [
-            FilledButton(onPressed: () {}, child: Text(effectiveText)),
+            FilledButton(onPressed: onPressed, child: Text(effectiveText)),
             const SizedBox(
               height: 48,
             ),

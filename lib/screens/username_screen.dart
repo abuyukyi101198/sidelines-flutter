@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/widgets/buttons/next_bottom_button.dart';
 import 'package:sidelines/widgets/fields/username_field.dart';
 
 class UsernameScreen extends StatelessWidget {
@@ -39,7 +38,6 @@ class UsernameScreen extends StatelessWidget {
               ]),
         ),
       ),
-      bottomNavigationBar: NextBottomButton(),
     );
   }
 }

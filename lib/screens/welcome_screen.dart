@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
-import 'package:sidelines/widgets/buttons/next_bottom_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -16,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [ColorPalette.backgroundColor, Colors.transparent],
-              ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height + 20));
+              ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height - 10));
             },
             blendMode: BlendMode.dstIn,
             child: SizedBox(
@@ -38,7 +37,7 @@ class WelcomeScreen extends StatelessWidget {
                   Text(
                     'Welcome to the squad!',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: ColorPalette.textColor,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
@@ -49,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                   Text(
                     'Now that you have created your account, let’s set up your profile.',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: ColorPalette.textColor,
                       fontSize: 12,
                     ),
                   ),
@@ -59,7 +58,6 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const NextBottomButton(),
     );
   }
 }
