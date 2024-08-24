@@ -29,9 +29,7 @@ class SignUpButton extends StatelessWidget {
               await signUp(emailController.text, passwordController.text);
           if (!context.mounted) return;
           if (response.statusCode == 201) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Sign up successful!')),
-            );
+            Navigator.pushReplacementNamed(context, '/setup-journey');
           } else {
             final Map<String, dynamic> responseData =
                 json.decode(response.body);

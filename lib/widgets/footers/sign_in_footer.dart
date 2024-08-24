@@ -8,13 +8,7 @@ class SignInFooter extends StatelessWidget {
   const SignInFooter({super.key});
 
   void onPressed(context) {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const SignUpScreen(),
-          transitionDuration: const Duration(seconds: 0),
-          reverseTransitionDuration: const Duration(seconds: 0)),
-    );
+    Navigator.pushNamed(context, '/sign-up');
   }
 
   @override
