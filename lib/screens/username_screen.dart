@@ -1,42 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/widgets/fields/username_field.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-import '../data/constants.dart';
+class UsernameScreen extends StatelessWidget {
+  final TextEditingController usernameController;
 
-class UsernameScreen extends StatefulWidget {
-  final Function(bool) onUsernameValid; // Callback for username validity
-
-  const UsernameScreen({super.key, required this.onUsernameValid});
-
-  @override
-  UsernameScreenState createState() => UsernameScreenState();
-}
-
-class UsernameScreenState extends State<UsernameScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-
-  Future<void> _checkUsername(String username) async {
-    if (username.isEmpty) {
-      widget.onUsernameValid(false); // Username is not valid
-      return;
-    }
-
-    final response = await http.post(
-      Uri.parse('${Constants.baseApiUrl}username-unique-check/'), // Replace with your API endpoint
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'username': username}),
-    );
-
-    setState(() {
-      if (response.statusCode == 200) {
-        widget.onUsernameValid(true); // Username is unique
-      } else {
-        widget.onUsernameValid(false); // Username is not unique or invalid
-      }
-    });
-  }
+  const UsernameScreen({super.key, required this.usernameController});
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +33,7 @@ class UsernameScreenState extends State<UsernameScreen> {
               ),
               const SizedBox(height: 36),
               UsernameField(
-                controller: _usernameController,
-                onChanged: (username) {
-                  _checkUsername(username);
-                },
+                controller: usernameController,
               ),
             ],
           ),

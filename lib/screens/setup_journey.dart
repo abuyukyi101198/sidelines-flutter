@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/buttons/next_bottom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sidelines/screens/username_screen.dart';
 import 'package:sidelines/screens/personal_info_screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../data/constants.dart';
 
 class SetupJourney extends StatefulWidget {
   const SetupJourney({super.key});
@@ -14,12 +18,20 @@ class SetupJourney extends StatefulWidget {
 
 class SetupJourneyState extends State<SetupJourney> {
   final PageController _pageController = PageController();
-  bool _isUsernameValid = false;
+  final TextEditingController _usernameController = TextEditingController();
 
-  void _updateUsernameValidity(bool isValid) {
-    setState(() {
-      _isUsernameValid = isValid;
-    });
+  Future<bool> _checkUsernameValidity(String username) async {
+    if (username.isEmpty) {
+      return false;
+    }
+    final token = await Storage().read('token');
+    final response = await http.post(
+      Uri.parse('${Constants.baseApiUrl}username-unique-check/'),
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Token $token'},
+      body: jsonEncode({'username': username}),
+    );
+
+    return response.statusCode == 200;
   }
 
   @override
@@ -45,24 +57,28 @@ class SetupJourneyState extends State<SetupJourney> {
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
-              UsernameScreen(onUsernameValid: _updateUsernameValidity),
+              UsernameScreen(usernameController: _usernameController),
               const PersonalInfoScreen(),
             ],
           ),
         ],
       ),
       bottomNavigationBar: NextBottomButton(
-        onPressed: () {
-          if (_pageController.page?.round() == 0 && !_isUsernameValid) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Please enter a unique username')),
-            );
-          } else {
-            _pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
+        onPressed: () async {
+          if (_pageController.page?.round() == 0) {
+            bool isUsernameValid = await _checkUsernameValidity(_usernameController.text);
+            if (!isUsernameValid) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Please enter a unique username')),
+              );
+              return;
+            }
           }
+
+          _pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
         },
       ),
     );
