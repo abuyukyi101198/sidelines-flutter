@@ -117,6 +117,7 @@ class SetupJourneyState extends State<SetupJourney> {
         ],
       ),
       bottomNavigationBar: SetupJourneyFooter(
+        index: _pageController.page!.round(),
         onBack: _goBack,
         onNext: _nextPage,
       ),
