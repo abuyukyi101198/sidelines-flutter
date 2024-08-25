@@ -45,7 +45,6 @@ class DateField extends StatelessWidget {
         ),
         DateTimeFormField(
           mode: DateTimeFieldPickerMode.date,
-          initialValue: DateTime.now(),
           lastDate: DateTime.now(),
           onDateSelected: (DateTime dateTime) {
             controller.text = dateTime.toString();
