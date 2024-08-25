@@ -33,6 +33,12 @@ class SetupJourneyState extends State<SetupJourney> {
         });
       }
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        currentIndex = _pageController.page?.round() ?? 0;
+      });
+    });
   }
 
   @override
@@ -119,7 +125,7 @@ class SetupJourneyState extends State<SetupJourney> {
         ],
       ),
       bottomNavigationBar: SetupJourneyFooter(
-        index: _pageController.page!.round(),
+        index: currentIndex,
         onBack: _goBack,
         onNext: _nextPage,
       ),
