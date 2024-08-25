@@ -43,6 +43,7 @@ class PersonalInfoScreen extends StatelessWidget {
                   label: 'Last name',
                 ),
                 DateField(
+                  label: 'Date of birth',
                   dateController: dateController,
                 ),
               ]),
