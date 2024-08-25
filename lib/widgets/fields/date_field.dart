@@ -4,14 +4,15 @@ import 'package:sidelines/utils/color_palette.dart';
 
 class DateField extends StatelessWidget {
   final String? label;
-  final TextEditingController dateController;
+  final TextEditingController controller;
 
   final String _defaultLabel = 'Date';
 
-  const DateField({super.key, this.label, required this.dateController});
+  const DateField({super.key, this.label, required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    controller.text = DateTime.now().toString();
     final String effectiveLabel = label ?? _defaultLabel;
     const TextStyle labelStyle = TextStyle(color: ColorPalette.textColor);
     final InputDecoration inputDecoration = InputDecoration(
@@ -47,7 +48,7 @@ class DateField extends StatelessWidget {
           initialValue: DateTime.now(),
           lastDate: DateTime.now(),
           onDateSelected: (DateTime dateTime) {
-            dateController.text = dateTime.toString();
+            controller.text = dateTime.toString();
           },
           decoration: inputDecoration,
           dateTextStyle: dateTextStyle,
