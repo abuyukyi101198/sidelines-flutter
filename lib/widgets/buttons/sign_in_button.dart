@@ -53,6 +53,7 @@ class SignInButton extends StatelessWidget {
             NotificationBar.show(context, errorMessage);
           }
         } catch (e) {
+          if (!context.mounted) return;
           NotificationBar.show(
               context, 'An error occurred. Please try again later.');
         }

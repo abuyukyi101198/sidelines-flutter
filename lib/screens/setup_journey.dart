@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/screens/welcome_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
+import 'package:sidelines/widgets/alerts/notification_bar.dart';
 import 'package:sidelines/widgets/footers/setup_journey_footer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sidelines/screens/username_screen.dart';
@@ -68,17 +69,18 @@ class SetupJourneyState extends State<SetupJourney> {
   }
 
   void _nextPage() async {
-    if (_pageController.page != null && _pageController.page!.round() == 1) {
-      bool isUsernameValid = await _checkUsernameValidity(_usernameController.text);
+    if (_pageController.page == null) return;
+    if (_pageController.page!.round() == 1) {
+      bool isUsernameValid =
+          await _checkUsernameValidity(_usernameController.text);
+      if (!mounted) return;
       if (!isUsernameValid) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please enter a unique username')),
-        );
+        NotificationBar.show(context, 'Please enter a unique username');
         return;
       }
     }
 
-    if (_pageController.page != null && _pageController.page!.round() < 2) {
+    if (_pageController.page!.round() < 2) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
