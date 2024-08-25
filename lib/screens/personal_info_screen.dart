@@ -4,47 +4,57 @@ import 'package:sidelines/widgets/fields/name_field.dart';
 
 
 class PersonalInfoScreen extends StatelessWidget {
-  final TextEditingController dateController;
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController dateOfBirthController;
 
-  const PersonalInfoScreen({super.key, required this.dateController});
+  const PersonalInfoScreen({
+    super.key,
+    required this.firstNameController,
+    required this.lastNameController,
+    required this.dateOfBirthController,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   'Personal Information',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
-                Text(
+                const Text(
                   'In addition to your full name, a date of birth and city of residence will help find friends and arrange matches within your age bracket, in your vicinity.',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 36,
                 ),
-                NameField(),
+                NameField(
+                  controller: firstNameController,
+                ),
                 NameField(
                   label: 'Last name',
+                  controller: lastNameController,
                 ),
                 DateField(
                   label: 'Date of birth',
-                  dateController: dateController,
+                  controller: dateOfBirthController,
                 ),
               ]),
         ),

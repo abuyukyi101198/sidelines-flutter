@@ -21,7 +21,9 @@ class SetupJourney extends StatefulWidget {
 class SetupJourneyState extends State<SetupJourney> {
   final PageController _pageController = PageController();
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _dateOfBirthController = TextEditingController();
   int currentIndex = 0;
 
   @override
@@ -46,7 +48,9 @@ class SetupJourneyState extends State<SetupJourney> {
   void dispose() {
     _pageController.dispose();
     _usernameController.dispose();
-    _dateController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _dateOfBirthController.dispose();
     super.dispose();
   }
 
@@ -87,7 +91,9 @@ class SetupJourneyState extends State<SetupJourney> {
         return;
       }
     } else if (_pageController.page!.round() == 2) {
-      print(_dateController.text);
+      print(_firstNameController.text);
+      print(_lastNameController.text);
+      print(_dateOfBirthController.text);
     }
 
     if (_pageController.page!.round() < 2) {
@@ -123,7 +129,10 @@ class SetupJourneyState extends State<SetupJourney> {
             children: [
               const WelcomeScreen(),
               UsernameScreen(usernameController: _usernameController),
-              PersonalInfoScreen(dateController: _dateController),
+              PersonalInfoScreen(
+                  firstNameController: _firstNameController,
+                  lastNameController: _lastNameController,
+                  dateOfBirthController: _dateOfBirthController),
             ],
           ),
         ],
