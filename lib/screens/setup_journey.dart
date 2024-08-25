@@ -21,6 +21,7 @@ class SetupJourney extends StatefulWidget {
 class SetupJourneyState extends State<SetupJourney> {
   final PageController _pageController = PageController();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
   int currentIndex = 0;
 
   @override
@@ -45,6 +46,7 @@ class SetupJourneyState extends State<SetupJourney> {
   void dispose() {
     _pageController.dispose();
     _usernameController.dispose();
+    _dateController.dispose();
     super.dispose();
   }
 
@@ -84,6 +86,8 @@ class SetupJourneyState extends State<SetupJourney> {
         NotificationBar.show(context, 'Please enter a unique username');
         return;
       }
+    } else if (_pageController.page!.round() == 2) {
+      print(_dateController.text);
     }
 
     if (_pageController.page!.round() < 2) {
@@ -119,7 +123,7 @@ class SetupJourneyState extends State<SetupJourney> {
             children: [
               const WelcomeScreen(),
               UsernameScreen(usernameController: _usernameController),
-              const PersonalInfoScreen(),
+              PersonalInfoScreen(dateController: _dateController),
             ],
           ),
         ],
