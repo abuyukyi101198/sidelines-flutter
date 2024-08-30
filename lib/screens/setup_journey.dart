@@ -56,6 +56,7 @@ class SetupJourneyState extends State<SetupJourney> {
 
   Future<bool> _checkUsernameValidity(String username) async {
     if (username.isEmpty) {
+      NotificationBar.show(context, 'Please enter a username');
       return false;
     }
     final token = await Storage().read('token');
@@ -68,7 +69,29 @@ class SetupJourneyState extends State<SetupJourney> {
       body: jsonEncode({'username': username}),
     );
 
-    return response.statusCode == 200;
+    if (response.statusCode != 200) {
+      if (!mounted) return false;
+      NotificationBar.show(context, 'Please enter a unique username');
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> _checkPersonalInfoValidity(
+      TextEditingController firstNameController,
+      TextEditingController lastNameController,
+      TextEditingController dateOfBirthController) async {
+    if (firstNameController.text.isEmpty) {
+      NotificationBar.show(context, 'Please enter your name');
+      return false;
+    } else if (lastNameController.text.isEmpty) {
+      NotificationBar.show(context, 'Please enter your last name');
+      return false;
+    } else if (dateOfBirthController.text.isEmpty) {
+      NotificationBar.show(context, 'Please select your date of birth');
+      return false;
+    }
+    return true;
   }
 
   void _goBack() {
@@ -81,22 +104,17 @@ class SetupJourneyState extends State<SetupJourney> {
   }
 
   void _nextPage() async {
+    bool isValid = false;
     if (_pageController.page == null) return;
     if (_pageController.page!.round() == 1) {
-      bool isUsernameValid =
-          await _checkUsernameValidity(_usernameController.text);
-      if (!mounted) return;
-      if (!isUsernameValid) {
-        NotificationBar.show(context, 'Please enter a unique username');
-        return;
-      }
+      isValid = await _checkUsernameValidity(_usernameController.text);
     } else if (_pageController.page!.round() == 2) {
-      print(_firstNameController.text);
-      print(_lastNameController.text);
-      print(_dateOfBirthController.text);
+      isValid = await _checkPersonalInfoValidity(
+          _firstNameController, _lastNameController, _dateOfBirthController);
     }
 
-    if (_pageController.page!.round() < 2) {
+    if (isValid && _pageController.page!.round() < 2 ||
+        _pageController.page!.round() == 0) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
