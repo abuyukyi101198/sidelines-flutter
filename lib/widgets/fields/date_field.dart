@@ -12,6 +12,7 @@ class DateField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.text = DateTime.now().toString();
     final String effectiveLabel = label ?? _defaultLabel;
     const TextStyle labelStyle = TextStyle(color: ColorPalette.textColor);
     final InputDecoration inputDecoration = InputDecoration(
