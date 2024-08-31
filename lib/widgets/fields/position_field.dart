@@ -87,6 +87,9 @@ class PositionFieldState extends State<PositionField> {
             ),
           ),
         ),
+        const SizedBox(
+          height: 36,
+        ),
       ],
     );
   }
