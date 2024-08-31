@@ -26,6 +26,7 @@ class SetupJourneyState extends State<SetupJourney> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dateOfBirthController = TextEditingController();
   final Set<String> _positionController = {};
+  final TextEditingController _kitNumberController = TextEditingController();
   int currentIndex = 0;
 
   @override
@@ -54,6 +55,7 @@ class SetupJourneyState extends State<SetupJourney> {
     _lastNameController.dispose();
     _dateOfBirthController.dispose();
     _positionController.clear();
+    _kitNumberController.dispose();
     super.dispose();
   }
 
@@ -114,6 +116,9 @@ class SetupJourneyState extends State<SetupJourney> {
     } else if (_pageController.page!.round() == 2) {
       isValid = await _checkPersonalInfoValidity(
           _firstNameController, _lastNameController, _dateOfBirthController);
+    } else if (_pageController.page!.round() == 3) {
+      print(_positionController.toString());
+      print(_kitNumberController.text);
     }
 
     if (isValid && _pageController.page!.round() < 3 ||
@@ -154,7 +159,10 @@ class SetupJourneyState extends State<SetupJourney> {
                   firstNameController: _firstNameController,
                   lastNameController: _lastNameController,
                   dateOfBirthController: _dateOfBirthController),
-              PlayerInfoScreen(positionController: _positionController,),
+              PlayerInfoScreen(
+                positionController: _positionController,
+                kitNumberController: _kitNumberController,
+              ),
             ],
           ),
         ],
