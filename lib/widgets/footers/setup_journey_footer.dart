@@ -16,8 +16,12 @@ class SetupJourneyFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? effectiveNextLabel =
-        index == 0 ? 'Let\'s get started!' : null;
+    String? effectiveNextLabel;
+    if (index == 0) {
+      effectiveNextLabel = 'Let\'s get started!';
+    } else if (index == 3) {
+      effectiveNextLabel = 'Complete';
+    }
     return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
