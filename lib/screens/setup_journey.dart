@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/data/storage.dart';
+import 'package:sidelines/screens/player_info_screen.dart';
 import 'package:sidelines/screens/welcome_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/alerts/notification_bar.dart';
@@ -24,6 +25,7 @@ class SetupJourneyState extends State<SetupJourney> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dateOfBirthController = TextEditingController();
+  final Set<String> _positionController = {};
   int currentIndex = 0;
 
   @override
@@ -51,6 +53,7 @@ class SetupJourneyState extends State<SetupJourney> {
     _firstNameController.dispose();
     _lastNameController.dispose();
     _dateOfBirthController.dispose();
+    _positionController.clear();
     super.dispose();
   }
 
@@ -113,7 +116,7 @@ class SetupJourneyState extends State<SetupJourney> {
           _firstNameController, _lastNameController, _dateOfBirthController);
     }
 
-    if (isValid && _pageController.page!.round() < 2 ||
+    if (isValid && _pageController.page!.round() < 3 ||
         _pageController.page!.round() == 0) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -130,7 +133,7 @@ class SetupJourneyState extends State<SetupJourney> {
         backgroundColor: Colors.transparent,
         title: SmoothPageIndicator(
           controller: _pageController,
-          count: 3,
+          count: 4,
           effect: const ExpandingDotsEffect(
             dotColor: ColorPalette.secondaryColor,
             activeDotColor: ColorPalette.primaryColor,
@@ -151,6 +154,7 @@ class SetupJourneyState extends State<SetupJourney> {
                   firstNameController: _firstNameController,
                   lastNameController: _lastNameController,
                   dateOfBirthController: _dateOfBirthController),
+              PlayerInfoScreen(positionController: _positionController,),
             ],
           ),
         ],
