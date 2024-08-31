@@ -36,7 +36,7 @@ class PersonalInfoScreen extends StatelessWidget {
                   height: 12,
                 ),
                 const Text(
-                  'In addition to your full name, a date of birth and city of residence will help find friends and arrange matches within your age bracket, in your vicinity.',
+                  'In addition to your full name, a date of birth will help find friends and arrange matches within your age bracket.',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
