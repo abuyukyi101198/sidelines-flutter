@@ -104,6 +104,7 @@ flutter:
     - assets/icons/matches.svg
     - assets/icons/teams.svg
     - assets/images/welcome.jpg
+    - assets/images/field.png
 
   fonts:
     - family: Sharp Grotesk
