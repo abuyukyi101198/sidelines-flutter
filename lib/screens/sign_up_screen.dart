@@ -30,6 +30,10 @@ class SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
+  bool validate() {
+    return _formKey.currentState!.validate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +59,13 @@ class SignUpScreenState extends State<SignUpScreen> {
                     PasswordField(
                       label: 'Re-enter your password',
                       controller: _confirmPasswordController,
+                      reenterPassword: _passwordController.text,
                     ),
                     SignUpButton(
                       emailController: _emailController,
                       passwordController: _passwordController,
                       confirmPasswordController: _confirmPasswordController,
+                      validate: validate,
                     ),
                     const OrDivider(),
                     const SignUpWithGoogle(),

@@ -28,6 +28,10 @@ class SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
+  bool validate() {
+    return _formKey.currentState!.validate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +49,7 @@ class SignInScreenState extends State<SignInScreen> {
                     EmailField(
                       label: 'Username/E-mail',
                       controller: _emailController,
+                      allowUsername: true,
                     ),
                     PasswordField(
                       controller: _passwordController,
@@ -53,6 +58,7 @@ class SignInScreenState extends State<SignInScreen> {
                     SignInButton(
                       emailController: _emailController,
                       passwordController: _passwordController,
+                      validate: validate,
                     ),
                     const OrDivider(),
                     const SignInWithGoogleButton(),

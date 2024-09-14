@@ -8,24 +8,20 @@ import '../alerts/notification_bar.dart';
 class SignInButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final bool Function() validate;
 
   const SignInButton({
     super.key,
     required this.emailController,
     required this.passwordController,
+    required this.validate,
   });
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: () async {
-        if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-          NotificationBar.show(context, 'Please fill all fields');
-          return;
-        }
-
-        if (!isValidEmail(emailController.text)) {
-          NotificationBar.show(context, 'Please enter a valid email address');
+        if (!validate()) {
           return;
         }
 
@@ -69,12 +65,5 @@ class SignInButton extends StatelessWidget {
       body: jsonEncode({'username': email, 'password': password}),
     );
     return response;
-  }
-
-  bool isValidEmail(String email) {
-    final regex = RegExp(
-      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-    );
-    return regex.hasMatch(email);
   }
 }

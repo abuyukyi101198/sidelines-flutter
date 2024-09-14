@@ -10,32 +10,21 @@ class SignUpButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
+  final bool Function() validate;
 
   const SignUpButton({
     super.key,
     required this.emailController,
     required this.passwordController,
     required this.confirmPasswordController,
+    required this.validate,
   });
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: () async {
-        if (emailController.text.isEmpty ||
-            passwordController.text.isEmpty ||
-            confirmPasswordController.text.isEmpty) {
-          NotificationBar.show(context, 'Please fill all fields');
-          return;
-        }
-
-        if (!isValidEmail(emailController.text)) {
-          NotificationBar.show(context, 'Please enter a valid email address');
-          return;
-        }
-
-        if (passwordController.text != confirmPasswordController.text) {
-          NotificationBar.show(context, 'Passwords do not match');
+        if (!validate()) {
           return;
         }
 
@@ -57,6 +46,7 @@ class SignUpButton extends StatelessWidget {
             NotificationBar.show(context, errorMessage);
           }
         } catch (e) {
+          if (!context.mounted) return;
           NotificationBar.show(
               context, 'An error occurred. Please try again later.');
         }
