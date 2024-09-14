@@ -15,43 +15,46 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sidelines',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: 'Sharp Grotesk',
-          primaryColor: ColorPalette.primaryColor,
-          scaffoldBackgroundColor: ColorPalette.backgroundColor,
-          appBarTheme: const AppBarTheme(
-            color: ColorPalette.backgroundColor,
-            foregroundColor: ColorPalette.textColor,
-          ),
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(fontSize: 12),
-          ),
-          textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                  textStyle: const TextStyle(
-                      fontFamily: 'Sharp Grotesk', fontSize: 12))),
-          filledButtonTheme: FilledButtonThemeData(
-              style: FilledButton.styleFrom(
-                  foregroundColor: ColorPalette.backgroundColor,
-                  backgroundColor: ColorPalette.primaryColor,
-                  textStyle: const TextStyle(
-                      fontFamily: 'Sharp Grotesk',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 12))),
-          dividerColor: ColorPalette.textColor,
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: ColorPalette.backgroundColor)),
-      initialRoute: '/sign-in',
-      routes: {
-        '/sign-in': (context) => const SignInScreen(),
-        '/sign-up': (context) => const SignUpScreen(),
-        '/setup-journey': (context) => const SetupJourney(),
-        '/matches': (context) => const MatchesScreen(),
-      },
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MaterialApp(
+        title: 'Sidelines',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: 'Sharp Grotesk',
+            primaryColor: ColorPalette.primaryColor,
+            scaffoldBackgroundColor: ColorPalette.backgroundColor,
+            appBarTheme: const AppBarTheme(
+              color: ColorPalette.backgroundColor,
+              foregroundColor: ColorPalette.textColor,
+            ),
+            textTheme: const TextTheme(
+              bodyMedium: TextStyle(fontSize: 12),
+            ),
+            textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                    textStyle: const TextStyle(
+                        fontFamily: 'Sharp Grotesk', fontSize: 12))),
+            filledButtonTheme: FilledButtonThemeData(
+                style: FilledButton.styleFrom(
+                    foregroundColor: ColorPalette.backgroundColor,
+                    backgroundColor: ColorPalette.primaryColor,
+                    textStyle: const TextStyle(
+                        fontFamily: 'Sharp Grotesk',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12))),
+            dividerColor: ColorPalette.textColor,
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                backgroundColor: ColorPalette.backgroundColor)),
+        initialRoute: '/sign-in',
+        routes: {
+          '/sign-in': (context) => const SignInScreen(),
+          '/sign-up': (context) => const SignUpScreen(),
+          '/setup-journey': (context) => const SetupJourney(),
+          '/matches': (context) => const MatchesScreen(),
+        },
+      ),
     );
   }
 }
