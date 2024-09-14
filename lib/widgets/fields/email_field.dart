@@ -4,6 +4,7 @@ import 'package:sidelines/widgets/fields/text_field_with_label.dart';
 class EmailField extends StatelessWidget {
   final String? label;
   final TextEditingController? controller;
+  final bool allowUsername;
 
   final String _defaultLabel = 'E-mail';
 
@@ -11,14 +12,15 @@ class EmailField extends StatelessWidget {
     super.key,
     this.label,
     this.controller,
+    this.allowUsername = false,
   });
 
-  String? _validateEmail(String? value) {
+  String? _validate(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your email';
+      return 'Please enter your ${allowUsername ? 'username or ' : ''}email';
     }
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    if (!emailRegex.hasMatch(value)) {
+    if (!emailRegex.hasMatch(value) && !allowUsername) {
       return 'Please enter a valid email address';
     }
     return null;
@@ -31,7 +33,7 @@ class EmailField extends StatelessWidget {
       label: effectiveLabel,
       controller: controller,
       textInputType: TextInputType.emailAddress,
-      validator: _validateEmail,
+      validator: _validate,
     );
   }
 }
