@@ -163,6 +163,7 @@ class SetupJourneyState extends State<SetupJourney> {
           NotificationBar.show(context, errorMessage);
         }
       } catch (e) {
+        if (!mounted) return;
         NotificationBar.show(
             context, 'An error occurred. Please try again later.');
       }
