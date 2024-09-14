@@ -34,50 +34,59 @@ class SignUpScreenState extends State<SignUpScreen> {
     return _formKey.currentState!.validate();
   }
 
+  String? _validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please re-enter your password';
+    }
+    if (value != _passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    const SignInAndUpLogo(),
-                    EmailField(
-                      label: 'Your e-mail address',
-                      controller: _emailController,
-                    ),
-                    PasswordField(
-                      label: 'Enter a password',
-                      controller: _passwordController,
-                    ),
-                    PasswordField(
-                      label: 'Re-enter your password',
-                      controller: _confirmPasswordController,
-                      reenterPassword: _passwordController.text,
-                    ),
-                    SignUpButton(
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                      confirmPasswordController: _confirmPasswordController,
-                      validate: validate,
-                    ),
-                    const OrDivider(),
-                    const SignUpWithGoogle(),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SignUpWithApple()
-                  ]),
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const SignInAndUpLogo(),
+                EmailField(
+                  label: 'Your e-mail address',
+                  controller: _emailController,
+                ),
+                PasswordField(
+                  label: 'Enter a password',
+                  controller: _passwordController,
+                ),
+                PasswordField(
+                  label: 'Re-enter your password',
+                  controller: _confirmPasswordController,
+                  validateConfirmPassword: _validateConfirmPassword,
+                ),
+                SignUpButton(
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  confirmPasswordController: _confirmPasswordController,
+                  validate: validate,
+                ),
+                const OrDivider(),
+                const SignUpWithGoogle(),
+                const SizedBox(height: 8),
+                const SignUpWithApple(),
+              ],
             ),
           ),
         ),
-        bottomNavigationBar: const SignUpFooter());
+      ),
       bottomNavigationBar: const SignInOrUpFooter(isSignIn: false),
+    );
   }
 }

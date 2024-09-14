@@ -1,16 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sidelines/widgets/fields/text_field_with_label.dart';
 
 class PasswordField extends StatefulWidget {
   final String? label;
   final TextEditingController? controller;
-  final String? reenterPassword;
+  final String? Function(String?)? validateConfirmPassword;
 
   const PasswordField({
     super.key,
     this.label,
     this.controller,
-    this.reenterPassword,
+    this.validateConfirmPassword,
   });
 
   @override
@@ -25,8 +25,8 @@ class PasswordFieldState extends State<PasswordField> {
     if (value.length < 8) {
       return 'Password must be at least 8 characters long';
     }
-    if (widget.reenterPassword != null && value != widget.reenterPassword) {
-      return 'Passwords do not match';
+    if (widget.validateConfirmPassword != null) {
+      return widget.validateConfirmPassword!(value);
     }
     return null;
   }
