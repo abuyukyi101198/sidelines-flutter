@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -47,12 +46,30 @@ class MyApp extends StatelessWidget {
             dividerColor: ColorPalette.textColor,
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 backgroundColor: ColorPalette.backgroundColor)),
-        initialRoute: '/sign-in',
-        routes: {
-          '/sign-in': (context) => const SignInScreen(),
-          '/sign-up': (context) => const SignUpScreen(),
-          '/setup-journey': (context) => const SetupJourney(),
-          '/matches': (context) => const MatchesScreen(),
+        home: const SignInScreen(),
+        onGenerateRoute: (settings) {
+          WidgetBuilder builder;
+          switch (settings.name) {
+            case '/sign-in':
+              builder = (BuildContext _) => const SignInScreen();
+              break;
+            case '/sign-up':
+              builder = (BuildContext _) => const SignUpScreen();
+              break;
+            case '/setup-journey':
+              builder = (BuildContext _) => const SetupJourney();
+              break;
+            case '/matches':
+              builder = (BuildContext _) => const MatchesScreen();
+              break;
+            default:
+              throw Exception('Invalid route: ${settings.name}');
+          }
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => builder(context),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          );
         },
       ),
     );
