@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/screens/player_info_screen.dart';
 import 'package:sidelines/screens/welcome_screen.dart';
@@ -99,6 +100,18 @@ class SetupJourneyState extends State<SetupJourney> {
     return true;
   }
 
+  Future<bool> _checkPlayerInfoValidity(Set<String> positionController,
+      TextEditingController kitNumberController) async {
+    if (positionController.isEmpty) {
+      NotificationBar.show(context, 'Please select at least one position');
+      return false;
+    } else if (kitNumberController.text.isEmpty) {
+      NotificationBar.show(context, 'Please enter a kit number');
+      return false;
+    }
+    return true;
+  }
+
   void _goBack() {
     if (_pageController.page != null && _pageController.page!.round() > 0) {
       _pageController.previousPage(
@@ -117,8 +130,8 @@ class SetupJourneyState extends State<SetupJourney> {
       isValid = await _checkPersonalInfoValidity(
           _firstNameController, _lastNameController, _dateOfBirthController);
     } else if (_pageController.page!.round() == 3) {
-      print(_positionController.toString());
-      print(_kitNumberController.text);
+      isValid = await _checkPlayerInfoValidity(
+          _positionController, _kitNumberController);
     }
 
     if (isValid && _pageController.page!.round() < 3 ||
@@ -127,7 +140,61 @@ class SetupJourneyState extends State<SetupJourney> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+    } else if (isValid && _pageController.page!.round() == 3) {
+      try {
+        final response = await patchProfile(
+            _usernameController.text,
+            _firstNameController.text,
+            _lastNameController.text,
+            _dateOfBirthController.text,
+            _positionController,
+            _kitNumberController.text);
+
+        if (!mounted) return;
+        if (response.statusCode == 200) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            '/matches',
+            (Route<dynamic> route) => false,
+          );
+        } else {
+          final Map<String, dynamic> responseData = json.decode(response.body);
+          final errorMessage = responseData['detail'] ??
+              'Profile setup failed. Please try again.';
+          NotificationBar.show(context, errorMessage);
+        }
+      } catch (e) {
+        NotificationBar.show(
+            context, 'An error occurred. Please try again later.');
+      }
     }
+  }
+
+  Future<http.Response> patchProfile(
+      String username,
+      String firstName,
+      String lastName,
+      String dateOfBirth,
+      Set<String> positions,
+      String kitNumber) async {
+    final token = await Storage().read('token');
+    final response = await http.patch(
+      Uri.parse('${Constants.baseApiUrl}profile/'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token'
+      },
+      body: jsonEncode({
+        'username': username,
+        'first_name': firstName,
+        'last_name': lastName,
+        'date_of_birth':
+            DateFormat('yyyy-MM-dd').format(DateTime.parse(dateOfBirth)),
+        'positions': positions.toList(),
+        'kit_number': kitNumber
+      }),
+    );
+
+    return response;
   }
 
   @override
