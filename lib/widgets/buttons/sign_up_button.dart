@@ -39,11 +39,20 @@ class SignUpButton extends StatelessWidget {
             );
             await Storage().write('token', jsonDecode(response.body)['token']);
           } else {
-            final Map<String, dynamic> responseData =
-                json.decode(response.body);
-            final errorMessage =
-                responseData['detail'] ?? 'Sign up failed. Please try again.';
-            NotificationBar.show(context, errorMessage);
+            final Map<String, dynamic> responseData = json.decode(response.body);
+            responseData.forEach((key, value) {
+              if (value is List) {
+                for (var error in value) {
+                  if (error is String) {
+                    NotificationBar.show(context, error);
+                    return;
+                  }
+                }
+              }
+            });
+            if (responseData.isEmpty) {
+              NotificationBar.show(context, 'Sign up failed. Please try again.');
+            }
           }
         } catch (e) {
           if (!context.mounted) return;
