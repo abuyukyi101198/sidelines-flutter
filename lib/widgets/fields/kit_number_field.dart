@@ -13,7 +13,9 @@ class KitNumberField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    kitNumberController.text = '1';
+    if (kitNumberController.text.isEmpty) {
+      kitNumberController.text = '10';
+    }
     const TextStyle fieldStyle = TextStyle(
       color: ColorPalette.primaryColor,
       fontSize: 36,
