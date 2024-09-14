@@ -4,7 +4,7 @@ import 'package:sidelines/widgets/buttons/sign_up_with_apple.dart';
 import 'package:sidelines/widgets/buttons/sign_up_with_google.dart';
 import 'package:sidelines/widgets/display/sign_in_and_up_logo.dart';
 import 'package:sidelines/widgets/fields/password_field.dart';
-import 'package:sidelines/widgets/footers/sign_up_footer.dart';
+import 'package:sidelines/widgets/footers/sign_in_or_up_footer.dart';
 import 'package:sidelines/widgets/misc/or_divider.dart';
 
 import '../widgets/fields/email_field.dart';
@@ -78,5 +78,6 @@ class SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         bottomNavigationBar: const SignUpFooter());
+      bottomNavigationBar: const SignInOrUpFooter(isSignIn: false),
   }
 }

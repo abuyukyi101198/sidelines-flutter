@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/widgets/display/sign_in_and_up_logo.dart';
+import 'package:sidelines/widgets/footers/sign_in_or_up_footer.dart';
 import '../widgets/buttons/forgot_password_link_button.dart';
 import '../widgets/buttons/sign_in_button.dart';
 import '../widgets/buttons/sign_in_with_apple_button.dart';
 import '../widgets/buttons/sign_in_with_google_button.dart';
 import '../widgets/fields/email_field.dart';
 import '../widgets/fields/password_field.dart';
-import '../widgets/footers/sign_in_footer.dart';
 import '../widgets/misc/or_divider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -70,6 +70,6 @@ class SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: const SignInFooter());
+        bottomNavigationBar: const SignInOrUpFooter(isSignIn: true,));
   }
 }
