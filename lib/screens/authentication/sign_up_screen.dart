@@ -7,7 +7,7 @@ import 'package:sidelines/widgets/fields/password_field.dart';
 import 'package:sidelines/widgets/footers/sign_in_or_up_footer.dart';
 import 'package:sidelines/widgets/misc/or_divider.dart';
 
-import '../widgets/fields/email_field.dart';
+import '../../widgets/fields/email_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

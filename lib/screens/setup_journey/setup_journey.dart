@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sidelines/data/storage.dart';
-import 'package:sidelines/screens/player_info_screen.dart';
-import 'package:sidelines/screens/welcome_screen.dart';
+import 'package:sidelines/screens/setup_journey/player_info_screen.dart';
+import 'package:sidelines/screens/setup_journey/welcome_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/alerts/notification_bar.dart';
 import 'package:sidelines/widgets/footers/setup_journey_footer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:sidelines/screens/username_screen.dart';
-import 'package:sidelines/screens/personal_info_screen.dart';
+import 'package:sidelines/screens/setup_journey/username_screen.dart';
+import 'package:sidelines/screens/setup_journey/personal_info_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../data/constants.dart';
+import '../../data/constants.dart';
 
 class SetupJourney extends StatefulWidget {
   const SetupJourney({super.key});

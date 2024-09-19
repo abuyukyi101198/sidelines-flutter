@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/screens/matches_screen.dart';
-import 'package:sidelines/screens/setup_journey.dart';
-import 'package:sidelines/screens/sign_in_screen.dart';
-import 'package:sidelines/screens/sign_up_screen.dart';
+import 'package:sidelines/screens/setup_journey/setup_journey.dart';
+import 'package:sidelines/screens/authentication/sign_in_screen.dart';
+import 'package:sidelines/screens/authentication/sign_up_screen.dart';
 import 'package:sidelines/utils/color_palette.dart';
 
 void main() {
