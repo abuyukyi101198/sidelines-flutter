@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/display/profile/name_display.dart';
 import 'package:sidelines/widgets/display/profile/profile_display.dart';
+import 'package:sidelines/widgets/display/profile/tag_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -31,93 +32,16 @@ class ProfileScreen extends StatelessWidget {
             height: 24.0,
           ),
           const NameDisplay(
-              firstName: 'firstName',
-              lastName: 'lastName',
-              username: 'username'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-                decoration: const BoxDecoration(
-                  color: ColorPalette.secondaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                ),
-                child: const Text(
-                  'Position',
-                  style: TextStyle(color: ColorPalette.textColor, height: 1.0),
-                ),
-              ),
-              const SizedBox(
-                width: 12.0,
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-                decoration: const BoxDecoration(
-                  color: ColorPalette.secondaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                ),
-                child: const Text(
-                  'Number X',
-                  style: TextStyle(color: ColorPalette.textColor, height: 1.0),
-                ),
-              ),
-              const SizedBox(
-                width: 12.0,
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-                decoration: const BoxDecoration(
-                  color: ColorPalette.secondaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                ),
-                child: const Text(
-                  'X matches played',
-                  style: TextStyle(color: ColorPalette.textColor, height: 1.0),
-                ),
-              ),
-            ],
+            firstName: 'firstName',
+            lastName: 'lastName',
+            username: 'username',
           ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-                decoration: const BoxDecoration(
-                  color: ColorPalette.secondaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                ),
-                child: const Text(
-                  'X years old',
-                  style: TextStyle(color: ColorPalette.textColor, height: 1.0),
-                ),
-              ),
-              const SizedBox(
-                width: 12.0,
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-                decoration: const BoxDecoration(
-                  color: ColorPalette.secondaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                ),
-                child: const Text(
-                  'Since Month X, XXXX',
-                  style: TextStyle(color: ColorPalette.textColor, height: 1.0),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 36.0,
+          const TagDisplay(
+            positionData: 'CM',
+            numberData: '6',
+            playedData: '12',
+            ageData: '23',
+            joinData: 'September 23rd, 2024',
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
