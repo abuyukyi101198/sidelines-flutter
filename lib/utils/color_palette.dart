@@ -9,4 +9,6 @@ class ColorPalette {
   static const backgroundColor = Color.fromRGBO(25, 23, 23, 1);
   
   static const successColor = Color.fromRGBO(45, 158, 43, 1);
+  static const warningColor = Color.fromRGBO(189, 182, 28, 1);
+  static const errorColor = Color.fromRGBO(158, 43, 43, 1);
 }

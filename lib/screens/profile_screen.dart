@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
+import 'package:sidelines/widgets/display/profile/profile_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -24,48 +25,7 @@ class ProfileScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 100,
-            child: Stack(
-              clipBehavior: Clip.none,
-              fit: StackFit.expand,
-              children: [
-                const CircleAvatar(
-                  radius: 48,
-                  backgroundColor: ColorPalette.secondaryColor,
-                ),
-                Positioned(
-                    bottom: -5,
-                    right: 130,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4.0, horizontal: 8.0),
-                      decoration: const BoxDecoration(
-                        color: ColorPalette.successColor,
-                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                      ),
-                      child: const Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Icon(
-                            Icons.star_rate_rounded,
-                            size: 16.0,
-                            color: ColorPalette.textColor,
-                          ),
-                          SizedBox(
-                            width: 2.0,
-                          ),
-                          Text(
-                            '8.0',
-                            style: TextStyle(
-                                color: ColorPalette.textColor, height: 1.2),
-                          )
-                        ],
-                      ),
-                    )),
-              ],
-            ),
-          ),
+          const ProfileDisplay(overallRating: 7),
           const SizedBox(
             height: 24.0,
           ),
@@ -237,7 +197,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 16.0,),
+          const SizedBox(height: 16.0,),
           Container(
             padding: EdgeInsets.all(16.0),
             child: AspectRatio(
