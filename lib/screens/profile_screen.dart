@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
+import 'package:sidelines/widgets/display/profile/name_display.dart';
 import 'package:sidelines/widgets/display/profile/profile_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -29,21 +30,10 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(
             height: 24.0,
           ),
-          const Text(
-            'Name Surname',
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.w700,
-              color: ColorPalette.primaryColor,
-            ),
-          ),
-          const Text(
-            '@username',
-            style: TextStyle(color: ColorPalette.secondaryColor),
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
+          const NameDisplay(
+              firstName: 'firstName',
+              lastName: 'lastName',
+              username: 'username'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -197,7 +187,9 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16.0,),
+          const SizedBox(
+            height: 16.0,
+          ),
           Container(
             padding: EdgeInsets.all(16.0),
             child: AspectRatio(
