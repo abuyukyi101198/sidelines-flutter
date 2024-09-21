@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/display/profile/name_display.dart';
 import 'package:sidelines/widgets/display/profile/profile_display.dart';
+import 'package:sidelines/widgets/display/profile/statistics_display.dart';
 import 'package:sidelines/widgets/display/profile/tag_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -43,74 +44,7 @@ class ProfileScreen extends StatelessWidget {
             ageData: '23',
             joinData: 'September 23rd, 2024',
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Goals',
-                    style: TextStyle(
-                        color: ColorPalette.textColor, fontSize: 16.0),
-                  ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  Text(
-                    'XX',
-                    style: TextStyle(
-                        color: ColorPalette.textColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 76.0,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Assists',
-                    style: TextStyle(
-                        color: ColorPalette.textColor, fontSize: 16.0),
-                  ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  Text(
-                    'XX',
-                    style: TextStyle(
-                        color: ColorPalette.textColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 76.0,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'MVP',
-                    style: TextStyle(
-                        color: ColorPalette.textColor, fontSize: 16.0),
-                  ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  Text(
-                    'XX',
-                    style: TextStyle(
-                        color: ColorPalette.textColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          const StatisticsDisplay(goalsData: 23, assistsData: 36, mvpData: 7),
           const SizedBox(
             height: 16.0,
           ),
