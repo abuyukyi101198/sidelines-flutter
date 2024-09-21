@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/widgets/display/profile/rating_badge.dart';
+import 'package:sidelines/widgets/badges/rating_badge.dart';
 
 import '../../../utils/color_palette.dart';
 

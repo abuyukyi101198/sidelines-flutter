@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/color_palette.dart';
+import '../../utils/color_palette.dart';
 
 class RatingBadge extends StatelessWidget {
   final double overallRating;
