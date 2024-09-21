@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/display/profile/name_display.dart';
+import 'package:sidelines/widgets/display/profile/performance_chart.dart';
 import 'package:sidelines/widgets/display/profile/profile_display.dart';
 import 'package:sidelines/widgets/display/profile/statistics_display.dart';
 import 'package:sidelines/widgets/display/profile/tag_display.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -24,102 +23,31 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
+      body: const Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const ProfileDisplay(overallRating: 7),
-          const SizedBox(
+          ProfileDisplay(overallRating: 7),
+          SizedBox(
             height: 24.0,
           ),
-          const NameDisplay(
+          NameDisplay(
             firstName: 'firstName',
             lastName: 'lastName',
             username: 'username',
           ),
-          const TagDisplay(
+          TagDisplay(
             positionData: 'CM',
             numberData: '6',
             playedData: '12',
             ageData: '23',
             joinData: 'September 23rd, 2024',
           ),
-          const StatisticsDisplay(goalsData: 23, assistsData: 36, mvpData: 7),
-          const SizedBox(
-            height: 16.0,
+          StatisticsDisplay(goalsData: 23, assistsData: 36, mvpData: 7),
+          SizedBox(
+            height: 24.0,
           ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            child: AspectRatio(
-              aspectRatio: 1.7,
-              child: LineChart(
-                LineChartData(
-                  gridData: const FlGridData(
-                    show: false,
-                  ),
-                  titlesData: FlTitlesData(
-                    show: true,
-                    rightTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: true),
-                    ),
-                    topTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                    bottomTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                    leftTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                          showTitles: true,
-                          interval: 1,
-                          reservedSize: 42,
-                          getTitlesWidget: (double value, TitleMeta meta) {
-                            const style = TextStyle(
-                                fontSize: 10.0,
-                                color: ColorPalette.secondaryColor);
-
-                            return SideTitleWidget(
-                              axisSide: meta.axisSide,
-                              space: 16.0,
-                              child: Text(
-                                value.toString(),
-                                style: style,
-                              ),
-                            );
-                          }),
-                    ),
-                  ),
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
-                  minX: 0,
-                  maxX: 5,
-                  minY: 0,
-                  maxY: 10,
-                  lineTouchData: LineTouchData(enabled: false),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: const [
-                        FlSpot(0, 7.2),
-                        FlSpot(1, 7.8),
-                        FlSpot(2, 8.3),
-                        FlSpot(3, 7.6),
-                        FlSpot(4, 9.2),
-                        FlSpot(5, 8.7),
-                      ],
-                      isCurved: true,
-                      color: ColorPalette.primaryColor,
-                      barWidth: 3,
-                      isStrokeCapRound: true,
-                      dotData: const FlDotData(
-                        show: false,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
+          PerformanceChart(ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 8.1]),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
