@@ -20,20 +20,23 @@ class StatisticsDisplayItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          label,
-          style: _labelStyle,
-        ),
-        const SizedBox(
-          height: 24.0,
-        ),
-        Text(
-          stat.toString(),
-          style: _valueStyle,
-        ),
-      ],
+    return SizedBox(
+      width: 64.0,
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: _labelStyle,
+          ),
+          const SizedBox(
+            height: 24.0,
+          ),
+          Text(
+            stat.toString(),
+            style: _valueStyle,
+          ),
+        ],
+      ),
     );
   }
 }
