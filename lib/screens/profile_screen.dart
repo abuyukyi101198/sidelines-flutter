@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/misc/navigation_item.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -184,11 +185,15 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     'XX',
                     style: TextStyle(
-                        color: ColorPalette.textColor, fontSize: 20.0, fontWeight: FontWeight.w700),
+                        color: ColorPalette.textColor,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
-              SizedBox(width: 76.0,),
+              SizedBox(
+                width: 76.0,
+              ),
               Column(
                 children: [
                   Text(
@@ -202,11 +207,15 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     'XX',
                     style: TextStyle(
-                        color: ColorPalette.textColor, fontSize: 20.0, fontWeight: FontWeight.w700),
+                        color: ColorPalette.textColor,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
-              SizedBox(width: 76.0,),
+              SizedBox(
+                width: 76.0,
+              ),
               Column(
                 children: [
                   Text(
@@ -220,11 +229,86 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     'XX',
                     style: TextStyle(
-                        color: ColorPalette.textColor, fontSize: 20.0, fontWeight: FontWeight.w700),
+                        color: ColorPalette.textColor,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
             ],
+          ),
+          SizedBox(height: 16.0,),
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: AspectRatio(
+              aspectRatio: 1.7,
+              child: LineChart(
+                LineChartData(
+                  gridData: const FlGridData(
+                    show: false,
+                  ),
+                  titlesData: FlTitlesData(
+                    show: true,
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: true),
+                    ),
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    bottomTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                          showTitles: true,
+                          interval: 1,
+                          reservedSize: 42,
+                          getTitlesWidget: (double value, TitleMeta meta) {
+                            const style = TextStyle(
+                                fontSize: 10.0,
+                                color: ColorPalette.secondaryColor);
+
+                            return SideTitleWidget(
+                              axisSide: meta.axisSide,
+                              space: 16.0,
+                              child: Text(
+                                value.toString(),
+                                style: style,
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  minX: 0,
+                  maxX: 5,
+                  minY: 0,
+                  maxY: 10,
+                  lineTouchData: LineTouchData(enabled: false),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: const [
+                        FlSpot(0, 7.2),
+                        FlSpot(1, 7.8),
+                        FlSpot(2, 8.3),
+                        FlSpot(3, 7.6),
+                        FlSpot(4, 9.2),
+                        FlSpot(5, 8.7),
+                      ],
+                      isCurved: true,
+                      color: ColorPalette.primaryColor,
+                      barWidth: 3,
+                      isStrokeCapRound: true,
+                      dotData: const FlDotData(
+                        show: false,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ),
