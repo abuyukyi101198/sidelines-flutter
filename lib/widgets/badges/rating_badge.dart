@@ -16,9 +16,11 @@ class RatingBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color color;
-    if (overallRating > 6.9) {
+
+    final double currentRating = overallRating == 0.0 ? 6.0 : overallRating;
+    if (currentRating > 6.9) {
       color = ColorPalette.successColor;
-    } else if (overallRating > 3.9) {
+    } else if (currentRating > 3.9) {
       color = ColorPalette.warningColor;
     } else {
       color = ColorPalette.errorColor;
@@ -30,7 +32,7 @@ class RatingBadge extends StatelessWidget {
     );
 
     final label = Text(
-      overallRating.toString(),
+      currentRating.toString(),
       style: const TextStyle(
         color: ColorPalette.textColor,
         height: 1.2,
