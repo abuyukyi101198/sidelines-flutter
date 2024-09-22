@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import '../data/constants.dart';
 import '../data/storage.dart';
@@ -27,6 +28,57 @@ class ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     fetchProfile();
+  }
+
+  String? _formatPosition(List<dynamic> positionsData) {
+    Iterable<String?> positions =
+    positionsData.map((value) => value?.toString());
+    const Map<String, String> positionCategories = {
+      'ST': 'Striker',
+      'LW': 'Winger',
+      'RW': 'Winger',
+      'CM': 'Midfielder',
+      'LB': 'Defender',
+      'CB': 'Defender',
+      'RB': 'Defender',
+      'GK': 'Goalkeeper',
+    };
+    if (positions.contains('GK')) {
+      return 'Goalkeeper';
+    }
+    Set<String?> categories =
+    positions.map((pos) => positionCategories[pos] ?? pos).toSet();
+    if (categories.length > 1) {
+      return 'Versatile';
+    }
+    return categories.isNotEmpty ? categories.first : 'N/A';
+  }
+
+  String _formatJoinDate(String date) {
+    DateTime parsedDate = DateTime.parse(date);
+    String formattedDate = DateFormat("MMMM d").format(parsedDate);
+    int day = parsedDate.day;
+
+    String daySuffix;
+    if (day % 10 == 1 && day != 11) {
+      daySuffix = 'st';
+    } else if (day % 10 == 2 && day != 12) {
+      daySuffix = 'nd';
+    } else if (day % 10 == 3 && day != 13) {
+      daySuffix = 'rd';
+    } else {
+      daySuffix = 'th';
+    }
+
+    return "$formattedDate$daySuffix, ${parsedDate.year}";
+  }
+
+  String _calculateAge(String? dateOfBirth) {
+    if (dateOfBirth == null) return 'N/A';
+    final dob = DateTime.parse(dateOfBirth);
+    final today = DateTime.now();
+    final age = today.year - dob.year;
+    return age.toString();
   }
 
   Future<http.Response?> fetchProfile() async {
@@ -91,11 +143,11 @@ class ProfileScreenState extends State<ProfileScreen> {
                       username: profileData!['username'],
                     ),
                     TagDisplay(
-                      positionData: profileData!['positions'].join(', '),
+                      positionData: _formatPosition(profileData!['positions'])!,
                       numberData: profileData!['kit_number'].toString(),
                       playedData: '12',
                       ageData: _calculateAge(profileData!['date_of_birth']),
-                      joinData: profileData!['join_date'],
+                      joinData: _formatJoinDate(profileData!['join_date']),
                     ),
                     StatisticsDisplay(
                       goalsData: profileData!['goals'],
@@ -120,13 +172,5 @@ class ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
     );
-  }
-
-  String _calculateAge(String? dateOfBirth) {
-    if (dateOfBirth == null) return 'N/A';
-    final dob = DateTime.parse(dateOfBirth);
-    final today = DateTime.now();
-    final age = today.year - dob.year;
-    return age.toString();
   }
 }
