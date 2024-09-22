@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/screens/matches_screen.dart';
+import 'package:sidelines/screens/profile_screen.dart';
 import 'package:sidelines/screens/setup_journey/setup_journey.dart';
 import 'package:sidelines/screens/authentication/sign_in_screen.dart';
 import 'package:sidelines/screens/authentication/sign_up_screen.dart';
@@ -61,6 +62,9 @@ class MyApp extends StatelessWidget {
               break;
             case '/matches':
               builder = (BuildContext _) => const MatchesScreen();
+              break;
+            case '/profile':
+              builder = (BuildContext _) => const ProfileScreen();
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');

@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sidelines/utils/color_palette.dart';
 import 'package:sidelines/widgets/display/team_badge.dart';
 import 'package:sidelines/widgets/display/upcoming_match_card.dart';
-import 'package:sidelines/widgets/display/upcoming_team_display.dart';
-import 'package:sidelines/widgets/misc/navigation_item.dart';
+
+import '../widgets/navigation/screen_navigation_bar.dart';
 
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({super.key});
@@ -33,8 +32,8 @@ class MatchesScreen extends StatelessWidget {
                 'Recent Matches',
                 style: TextStyle(color: ColorPalette.textColor, fontSize: 16),
               ),
-              SizedBox(height: 8,),
-              Container(
+              const SizedBox(height: 8,),
+              SizedBox(
                   height: 156,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -92,13 +91,8 @@ class MatchesScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          NavigationItem(iconPath: 'assets/icons/matches.svg'),
-          NavigationItem(iconPath: 'assets/icons/teams.svg'),
-          NavigationItem(iconPath: 'assets/icons/arrange.svg'),
-          NavigationItem(iconPath: 'assets/icons/friends.svg'),
-        ],
+      bottomNavigationBar: const ScreenNavigationBar(
+        currentIndex: 0,
       ),
     );
   }

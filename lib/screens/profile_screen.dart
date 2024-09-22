@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:sidelines/widgets/navigation/screen_navigation_bar.dart';
 
 import '../data/constants.dart';
 import '../data/storage.dart';
@@ -11,7 +12,6 @@ import '../widgets/display/profile/performance_chart.dart';
 import '../widgets/display/profile/profile_display.dart';
 import '../widgets/display/profile/statistics_display.dart';
 import '../widgets/display/profile/tag_display.dart';
-import '../widgets/misc/navigation_item.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -163,16 +163,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                   ],
                 )
               : const Center(child: Text('No profile data available')),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: const ScreenNavigationBar(
         currentIndex: 4,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          NavigationItem(iconPath: 'assets/icons/matches.svg'),
-          NavigationItem(iconPath: 'assets/icons/teams.svg'),
-          NavigationItem(iconPath: 'assets/icons/arrange.svg'),
-          NavigationItem(iconPath: 'assets/icons/friends.svg'),
-          NavigationItem(iconPath: 'assets/icons/friends.svg'),
-        ],
       ),
     );
   }
