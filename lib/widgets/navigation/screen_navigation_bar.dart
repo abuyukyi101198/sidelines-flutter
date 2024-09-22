@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/profile_provider.dart';
 import 'navigation_item.dart';
 
 class ScreenNavigationBar extends StatelessWidget {
   final int currentIndex;
-  final String? profilePictureUrl;
 
   const ScreenNavigationBar({
     super.key,
     required this.currentIndex,
-    this.profilePictureUrl,
   });
 
   void onTap(BuildContext context, int toIndex) {
@@ -35,12 +35,15 @@ class ScreenNavigationBar extends StatelessWidget {
 
     Navigator.of(context).pushNamedAndRemoveUntil(
       route,
-      (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final profilePictureUrl =
+        Provider.of<ProfileProvider>(context).profilePictureUrl;
+
     return BottomNavigationBar(
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
@@ -56,7 +59,7 @@ class ScreenNavigationBar extends StatelessWidget {
           icon: CircleAvatar(
             radius: 14,
             backgroundImage: profilePictureUrl != null
-                ? NetworkImage(profilePictureUrl!)
+                ? NetworkImage(profilePictureUrl)
                 : null,
           ),
           label: '',

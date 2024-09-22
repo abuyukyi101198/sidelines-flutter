@@ -4,9 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:sidelines/widgets/badges/rating_badge.dart';
 import '../../../data/constants.dart';
 import '../../../data/storage.dart';
+import '../../../providers/profile_provider.dart';
 import '../../../utils/color_palette.dart';
 import '../../alerts/notification_bar.dart';
 
@@ -68,7 +70,8 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
         if (response.statusCode == 200) {
           String responseString = await response.stream.bytesToString();
           String newUrl = json.decode(responseString)['profile_picture_url'];
-
+          final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+          profileProvider.setProfilePictureUrl(newUrl);
           setState(() {
             _currentProfilePictureUrl = newUrl;
           });

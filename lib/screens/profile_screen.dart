@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:sidelines/widgets/navigation/screen_navigation_bar.dart';
 
 import '../data/constants.dart';
 import '../data/storage.dart';
+import '../providers/profile_provider.dart';
 import '../widgets/alerts/notification_bar.dart';
 import '../widgets/display/profile/name_display.dart';
 import '../widgets/display/profile/performance_chart.dart';
@@ -92,10 +94,14 @@ class ProfileScreenState extends State<ProfileScreen> {
 
       if (!mounted) return null;
       if (response.statusCode == 200) {
+        final profileData = json.decode(utf8.decode(response.bodyBytes));
         setState(() {
-          profileData = json.decode(utf8.decode(response.bodyBytes));
+          this.profileData = profileData;
           isLoading = false;
         });
+
+        final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+        profileProvider.setProfilePictureUrl(profileData['profile_picture']);
       } else {
         setState(() {
           isLoading = false;
