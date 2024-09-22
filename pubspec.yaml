@@ -38,6 +38,7 @@ dependencies:
   date_field: ^3.0.0
   image_picker: ^0.8.4+4
   path: any
+  provider: ^6.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
