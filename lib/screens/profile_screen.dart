@@ -20,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
   ProfileScreenState createState() => ProfileScreenState();
 }
 
+// TODO: Implement performance
 class ProfileScreenState extends State<ProfileScreen> {
   Map<String, dynamic>? profileData;
   bool isLoading = true;
@@ -32,7 +33,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   String? _formatPosition(List<dynamic> positionsData) {
     Iterable<String?> positions =
-    positionsData.map((value) => value?.toString());
+        positionsData.map((value) => value?.toString());
     const Map<String, String> positionCategories = {
       'ST': 'Striker',
       'LW': 'Winger',
@@ -47,7 +48,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       return 'Goalkeeper';
     }
     Set<String?> categories =
-    positions.map((pos) => positionCategories[pos] ?? pos).toSet();
+        positions.map((pos) => positionCategories[pos] ?? pos).toSet();
     if (categories.length > 1) {
       return 'Versatile';
     }
@@ -135,7 +136,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ProfileDisplay(
-                        overallRating: profileData!['overall_rating']),
+                      overallRating: profileData!['overall_rating'],
+                      profilePictureUrl: profileData!['profile_picture'],
+                    ),
                     const SizedBox(height: 24.0),
                     NameDisplay(
                       firstName: profileData!['first_name'],
@@ -157,11 +160,11 @@ class ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 24.0),
                     const PerformanceChart(
                         ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 8.1]),
-                    // Replace with real data
                   ],
                 )
               : const Center(child: Text('No profile data available')),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 4,
         type: BottomNavigationBarType.fixed,
         items: [
           NavigationItem(iconPath: 'assets/icons/matches.svg'),
