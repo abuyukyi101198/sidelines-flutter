@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/profile_provider.dart';
+import '../../utils/color_palette.dart';
 import 'navigation_item.dart';
 
 class ScreenNavigationBar extends StatelessWidget {
@@ -35,7 +36,7 @@ class ScreenNavigationBar extends StatelessWidget {
 
     Navigator.of(context).pushNamedAndRemoveUntil(
       route,
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
   }
 
@@ -56,11 +57,24 @@ class ScreenNavigationBar extends StatelessWidget {
         NavigationItem(iconPath: 'assets/icons/arrange.svg'),
         NavigationItem(iconPath: 'assets/icons/friends.svg'),
         BottomNavigationBarItem(
-          icon: CircleAvatar(
-            radius: 14,
-            backgroundImage: profilePictureUrl != null
-                ? NetworkImage(profilePictureUrl)
-                : null,
+          icon: Container(
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: ColorPalette.secondaryColor,
+              border: currentIndex == 4 ? Border.all(
+                color: ColorPalette.primaryColor,
+                width: 2.0,
+                style: BorderStyle.solid,
+                strokeAlign: BorderSide.strokeAlignOutside,
+              ) : null,
+              image: profilePictureUrl != null
+                  ? DecorationImage(
+                      image: NetworkImage(profilePictureUrl) as ImageProvider,
+                      fit: BoxFit.cover)
+                  : null,
+            ),
           ),
           label: '',
         ),

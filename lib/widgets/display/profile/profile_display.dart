@@ -50,11 +50,11 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
     }
   }
 
-  Future<void> _uploadProfilePicture(BuildContext context, File? imageFile) async {
+  Future<void> _uploadProfilePicture(
+      BuildContext context, File? imageFile) async {
     if (imageFile != null) {
       try {
-        String apiUrl =
-            '${Constants.baseApiUrl}upload-profile-picture/';
+        String apiUrl = '${Constants.baseApiUrl}upload-profile-picture/';
         final token = await Storage().read('token');
         var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
         request.headers['Authorization'] = 'Token $token';
@@ -70,7 +70,8 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
         if (response.statusCode == 200) {
           String responseString = await response.stream.bytesToString();
           String newUrl = json.decode(responseString)['profile_picture_url'];
-          final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+          final profileProvider =
+              Provider.of<ProfileProvider>(context, listen: false);
           profileProvider.setProfilePictureUrl(newUrl);
           setState(() {
             _currentProfilePictureUrl = newUrl;
@@ -103,15 +104,19 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
             onTap: () {
               _pickImage(context);
             },
-            child: CircleAvatar(
-              radius: 48,
-              backgroundColor: ColorPalette.secondaryColor,
-              backgroundImage: _currentProfilePictureUrl != null
-                  ? NetworkImage(_currentProfilePictureUrl!)
-                  : _image != null
-                      ? FileImage(_image!)
-                          as ImageProvider
-                      : null,
+            child: Container(
+              width: 96,
+              height: 96,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorPalette.secondaryColor,
+                image: _currentProfilePictureUrl != null
+                    ? DecorationImage(
+                        image: NetworkImage(_currentProfilePictureUrl!)
+                            as ImageProvider,
+                        fit: BoxFit.contain)
+                    : null,
+              ),
             ),
           ),
           Positioned(
