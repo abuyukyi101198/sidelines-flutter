@@ -3,10 +3,12 @@ import 'navigation_item.dart';
 
 class ScreenNavigationBar extends StatelessWidget {
   final int currentIndex;
+  final String? profilePictureUrl;
 
   const ScreenNavigationBar({
     super.key,
     required this.currentIndex,
+    this.profilePictureUrl,
   });
 
   void onTap(BuildContext context, int toIndex) {
@@ -50,7 +52,15 @@ class ScreenNavigationBar extends StatelessWidget {
         NavigationItem(iconPath: 'assets/icons/teams.svg'),
         NavigationItem(iconPath: 'assets/icons/arrange.svg'),
         NavigationItem(iconPath: 'assets/icons/friends.svg'),
-        NavigationItem(iconPath: 'assets/icons/friends.svg'),
+        BottomNavigationBarItem(
+          icon: CircleAvatar(
+            radius: 14,
+            backgroundImage: profilePictureUrl != null
+                ? NetworkImage(profilePictureUrl!)
+                : null,
+          ),
+          label: '',
+        ),
       ],
     );
   }
