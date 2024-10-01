@@ -49,6 +49,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.14.1"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -116,3 +117,8 @@ flutter:
         - asset: assets/fonts/SharpGrotesk-Book20.otf
         - asset: assets/fonts/SharpGrotesk-Medium20.otf
           weight: 700
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/sidelines_app.png"
