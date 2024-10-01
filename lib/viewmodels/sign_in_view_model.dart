@@ -10,6 +10,8 @@ import '../data/constants.dart';
 class SignInViewModel extends ChangeNotifier {
   final Storage storage = Storage();
 
+  http.Response? response;
+
   ValueNotifier<bool> isLoading = ValueNotifier(false);
 
   Future<void> signIn(
@@ -17,28 +19,22 @@ class SignInViewModel extends ChangeNotifier {
     isLoading.value = true;
 
     try {
-      final response = await http.post(
+      response = await http.post(
         Uri.parse('${Constants.baseApiUrl}sign-in/'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'username': usernameOrEmail, 'password': password}),
       );
 
       if (!context.mounted) return;
-
-      if (response.statusCode == 200) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/matches',
-          (Route<dynamic> route) => false,
-        );
-        await Storage().write('token', jsonDecode(response.body)['token']);
-      } else if (response.statusCode == 206) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/setup-journey',
-          (Route<dynamic> route) => false,
-        );
-        await storage.write('token', jsonDecode(response.body)['token']);
-      } else {
-        throw ApiException(response);
+      switch (response?.statusCode) {
+        case 200:
+          onSuccess(context);
+          break;
+        case 206:
+          onPartialSuccess(context);
+          break;
+        default:
+          throw ApiException(response);
       }
     } catch (error) {
       if (!context.mounted) return;
@@ -46,5 +42,21 @@ class SignInViewModel extends ChangeNotifier {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void onSuccess(BuildContext context) async {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      '/matches',
+      (Route<dynamic> route) => false,
+    );
+    await storage.write('token', jsonDecode(response!.body)['token']);
+  }
+
+  void onPartialSuccess(BuildContext context) async {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      '/setup-journey',
+      (Route<dynamic> route) => false,
+    );
+    await storage.write('token', jsonDecode(response!.body)['token']);
   }
 }
