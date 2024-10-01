@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sidelines/providers/profile_provider.dart';
-import 'package:sidelines/screens/matches_screen.dart';
-import 'package:sidelines/screens/profile_screen.dart';
-import 'package:sidelines/screens/setup_journey/setup_journey.dart';
-import 'package:sidelines/screens/authentication/sign_in_screen.dart';
-import 'package:sidelines/screens/authentication/sign_up_screen.dart';
-import 'package:sidelines/utils/color_palette.dart';
+
+import 'deprecated/providers/profile_provider.dart';
+import 'deprecated/screens/authentication/sign_in_screen.dart';
+import 'deprecated/screens/authentication/sign_up_screen.dart';
+import 'deprecated/screens/matches_screen.dart';
+import 'deprecated/screens/profile_screen.dart';
+import 'deprecated/screens/setup_journey/setup_journey.dart';
+import 'deprecated/utils/color_palette.dart';
 
 void main() {
   runApp(
