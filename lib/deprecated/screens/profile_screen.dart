@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../data/constants.dart';
-import '../data/storage.dart';
+import '../../data/constants.dart';
+import '../../data/storage.dart';
 import '../providers/profile_provider.dart';
 import '../widgets/alerts/notification_bar.dart';
 import '../widgets/display/profile/name_display.dart';
