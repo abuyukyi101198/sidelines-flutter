@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sidelines/views/sign_in_view.dart';
 
 import 'deprecated/providers/profile_provider.dart';
 import 'deprecated/screens/authentication/sign_in_screen.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
             dividerColor: ColorPalette.textColor,
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 backgroundColor: ColorPalette.backgroundColor)),
-        home: const SignInScreen(),
+        home: SignInView(),
         onGenerateRoute: (settings) {
           WidgetBuilder builder;
           switch (settings.name) {
