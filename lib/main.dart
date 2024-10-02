@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           WidgetBuilder builder;
           switch (settings.name) {
             case '/sign-in':
-              builder = (BuildContext _) => const SignInScreen();
+              builder = (BuildContext _) => SignInView();
               break;
             case '/sign-up':
               builder = (BuildContext _) => const SignUpScreen();

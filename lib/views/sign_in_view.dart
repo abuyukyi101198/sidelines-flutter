@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/widgets/buttons/link_button.dart';
 import 'package:sidelines/widgets/fields/labeled_text_field.dart';
+import 'package:sidelines/widgets/footers/auth_footer.dart';
 import 'package:sidelines/widgets/visuals/sidelines_logo.dart';
 
 import '../viewmodels/sign_in_view_model.dart';
@@ -47,10 +48,20 @@ class SignInView extends StatelessWidget {
                     label: 'Forgot password?',
                   ),
                 ),
-              )
+              ),
+              FilledButton(
+                onPressed: () {
+                  viewModel.signIn(
+                      context, emailController.text, passwordController.text);
+                },
+                child: const Text('Sign in'),
+              ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: const AuthFooter(
+        isSignIn: true,
       ),
     );
   }
