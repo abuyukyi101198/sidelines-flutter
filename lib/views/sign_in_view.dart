@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sidelines/widgets/buttons/link_button.dart';
+import 'package:sidelines/widgets/fields/labeled_text_field.dart';
+import 'package:sidelines/widgets/visuals/sidelines_logo.dart';
 
 import '../viewmodels/sign_in_view_model.dart';
 
@@ -14,33 +16,40 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                viewModel.signIn(
-                    context, emailController.text, passwordController.text);
-              },
-              child: Text('Sign In'),
-            ),
-            ValueListenableBuilder<bool>(
-              valueListenable: viewModel.isLoading,
-              builder: (context, isLoading, child) {
-                return isLoading ? CircularProgressIndicator() : SizedBox();
-              },
-            ),
-          ],
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: SafeArea(
+          minimum: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              const SidelinesLogo(
+                margin: EdgeInsets.only(top: 128.0, bottom: 54.0),
+                width: 128.0,
+              ),
+              LabeledTextField(
+                label: 'Username/E-mail',
+                controller: emailController,
+                textInputType: TextInputType.emailAddress,
+              ),
+              LabeledTextField(
+                label: 'Password',
+                controller: passwordController,
+                textInputType: TextInputType.visiblePassword,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  margin: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+                  child: LinkButton(
+                    onPressed: () {},
+                    label: 'Forgot password?',
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
