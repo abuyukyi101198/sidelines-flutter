@@ -4,7 +4,6 @@ import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/views/sign_in_view.dart';
 
 import 'deprecated/providers/profile_provider.dart';
-import 'deprecated/screens/authentication/sign_in_screen.dart';
 import 'deprecated/screens/authentication/sign_up_screen.dart';
 import 'deprecated/screens/matches_screen.dart';
 import 'deprecated/screens/profile_screen.dart';
