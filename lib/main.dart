@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/views/sign_in_view.dart';
+import 'package:sidelines/views/sign_up_view.dart';
 
 import 'deprecated/providers/profile_provider.dart';
-import 'deprecated/screens/authentication/sign_up_screen.dart';
 import 'deprecated/screens/matches_screen.dart';
 import 'deprecated/screens/profile_screen.dart';
 import 'deprecated/screens/setup_journey/setup_journey.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
               builder = (BuildContext _) => SignInView();
               break;
             case '/sign-up':
-              builder = (BuildContext _) => const SignUpScreen();
+              builder = (BuildContext _) => SignUpView();
               break;
             case '/setup-journey':
               builder = (BuildContext _) => const SetupJourney();
