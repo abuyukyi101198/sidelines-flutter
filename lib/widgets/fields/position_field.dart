@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/color_palette.dart';
-import '../buttons/position_button.dart';
+import '../../deprecated/utils/color_palette.dart';
+import '../../deprecated/widgets/buttons/position_button.dart';
 
 class PositionField extends StatefulWidget {
   final Set<String> positionController;

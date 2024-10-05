@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/fields/kit_number_field.dart';
-import '../../widgets/fields/position_field.dart';
+import '../../../widgets/fields/kit_number_field.dart';
+import '../../../widgets/fields/position_field.dart';
 
 class PlayerInfoScreen extends StatefulWidget {
   final Set<String> positionController;

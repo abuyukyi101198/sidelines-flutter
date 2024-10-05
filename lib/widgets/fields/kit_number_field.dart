@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../utils/color_palette.dart';
+import '../../deprecated/utils/color_palette.dart';
 
 class KitNumberField extends StatelessWidget {
   final TextEditingController kitNumberController;
