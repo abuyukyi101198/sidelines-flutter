@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/models/sign_up_model.dart';
 import 'package:sidelines/viewmodels/sign_up_view_model.dart';
 
 import '../widgets/fields/labeled_text_field.dart';
@@ -50,8 +51,11 @@ class SignUpView extends StatelessWidget {
               ),
               FilledButton(
                 onPressed: () {
-                  viewModel.signUp(context, emailController.text,
-                      passwordController.text, confirmPasswordController.text);
+                  SignUpModel signUpModel = SignUpModel(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      confirmPassword: confirmPasswordController.text);
+                  viewModel.signUp(context, signUpModel);
                 },
                 child: const Text('Sign up'),
               ),

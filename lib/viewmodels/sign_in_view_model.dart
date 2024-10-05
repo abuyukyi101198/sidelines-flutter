@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sidelines/data/storage.dart';
+import 'package:sidelines/models/sign_in_model.dart';
 import 'package:sidelines/widgets/notifications/notification_bar.dart';
 import 'package:sidelines/exceptions/api_exception.dart';
 import 'package:sidelines/exceptions/runtime_exception.dart';
-import 'package:sidelines/exceptions/validation_exception.dart';
 
 import '../data/constants.dart';
 
@@ -16,30 +16,18 @@ class SignInViewModel extends ChangeNotifier {
 
   ValueNotifier<bool> isLoading = ValueNotifier(false);
 
-  void validate(String usernameOrEmail, String password) {
-    List<String> errors = [];
-    if (usernameOrEmail.isEmpty) {
-      errors.add('Please enter your username or email.');
-    }
-    if (password.isEmpty) {
-      errors.add('Please enter your password.');
-    }
-
-    if (errors.isNotEmpty) {
-      throw ValidationException(errors);
-    }
-  }
-
-  Future<void> signIn(
-      BuildContext context, String usernameOrEmail, String password) async {
+  Future<void> signIn(BuildContext context, SignInModel signInModel) async {
     isLoading.value = true;
 
     try {
-      validate(usernameOrEmail, password);
+      signInModel.validate();
       response = await http.post(
         Uri.parse('${Constants.baseApiUrl}sign-in/'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'username': usernameOrEmail, 'password': password}),
+        body: jsonEncode({
+          'username': signInModel.usernameOrEmail,
+          'password': signInModel.password
+        }),
       );
 
       if (!context.mounted) return;

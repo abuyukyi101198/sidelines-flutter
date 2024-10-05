@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/models/sign_in_model.dart';
 import 'package:sidelines/widgets/buttons/link_button.dart';
 import 'package:sidelines/widgets/fields/labeled_text_field.dart';
 import 'package:sidelines/widgets/footers/auth_footer.dart';
@@ -51,8 +52,10 @@ class SignInView extends StatelessWidget {
               ),
               FilledButton(
                 onPressed: () {
-                  viewModel.signIn(
-                      context, emailController.text, passwordController.text);
+                  SignInModel signInModel = SignInModel(
+                      usernameOrEmail: emailController.text,
+                      password: passwordController.text);
+                  viewModel.signIn(context, signInModel);
                 },
                 child: const Text('Sign in'),
               ),
