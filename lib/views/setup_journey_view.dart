@@ -8,8 +8,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../deprecated/screens/setup_journey/personal_info_screen.dart';
 import '../deprecated/screens/setup_journey/player_info_screen.dart';
 import '../deprecated/screens/setup_journey/username_screen.dart';
-import '../deprecated/widgets/footers/setup_journey_footer.dart';
+import '../exceptions/runtime_exception.dart';
 import '../viewmodels/setup_journey_view_model.dart';
+import '../widgets/footers/setup_journey_footer.dart';
+import '../widgets/notifications/notification_bar.dart';
 
 class SetupJourneyView extends StatefulWidget {
   const SetupJourneyView({super.key});
@@ -65,16 +67,26 @@ class SetupJourneyViewState extends State<SetupJourneyView> {
       positions: _positionController,
       kitNumber: _kitNumberController.text,
     );
-    await viewModel.validate(_pageController.page!.round(), setupJourneyModel);
-    if (_pageController.page!.round() < 3 ||
-        _pageController.page!.round() == 0) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    } else if (_pageController.page!.round() == 3) {
+    try {
+      await viewModel.validate(
+          _pageController.page!.round(), setupJourneyModel);
+      if (_pageController.page!.round() < 3 ||
+          _pageController.page!.round() == 0) {
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      } else if (_pageController.page!.round() == 3) {
+        if (!mounted) return;
+        viewModel.patchProfile(context, currentIndex, setupJourneyModel);
+      }
+    } catch (error) {
       if (!mounted) return;
-      viewModel.patchProfile(context, currentIndex, setupJourneyModel);
+      if (error is RuntimeException) {
+        NotificationBar.show(context, error.messages.first);
+      } else {
+        NotificationBar.show(context, 'An unexpected error occurred.');
+      }
     }
   }
 

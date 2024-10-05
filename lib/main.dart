@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
+import 'package:sidelines/views/setup_journey_view.dart';
 import 'package:sidelines/views/sign_in_view.dart';
 import 'package:sidelines/views/sign_up_view.dart';
 
 import 'deprecated/providers/profile_provider.dart';
 import 'deprecated/screens/matches_screen.dart';
 import 'deprecated/screens/profile_screen.dart';
-import 'deprecated/screens/setup_journey/setup_journey.dart';
 
 void main() {
   runApp(
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
               builder = (BuildContext _) => SignUpView();
               break;
             case '/setup-journey':
-              builder = (BuildContext _) => const SetupJourney();
+              builder = (BuildContext _) => const SetupJourneyView();
               break;
             case '/matches':
               builder = (BuildContext _) => const MatchesScreen();

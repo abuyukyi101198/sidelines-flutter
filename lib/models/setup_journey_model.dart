@@ -26,7 +26,9 @@ class SetupJourneyModel {
   });
 
   Future<void> validate(int currentPage) async {
-    if (currentPage == 1) {
+    if (currentPage == 0) {
+      return;
+    } else if (currentPage == 1) {
       await _validateProfilePictureAndUsername();
     } else if (currentPage == 2) {
       _validatePersonalInfo();
