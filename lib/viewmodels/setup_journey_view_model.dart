@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:path/path.dart';
 import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/exceptions/api_exception.dart';
 import 'package:sidelines/models/setup_journey_model.dart';
@@ -29,23 +30,31 @@ class SetupJourneyViewModel extends ChangeNotifier {
 
     try {
       setupJourneyModel.validate(currentIndex);
+
       final token = await storage.read('token');
-      final response = await http.patch(
-        Uri.parse('${Constants.baseApiUrl}profile/'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $token'
-        },
-        body: jsonEncode({
-          'username': setupJourneyModel.username,
-          'first_name': setupJourneyModel.firstName,
-          'last_name': setupJourneyModel.lastName,
-          'date_of_birth': DateFormat('yyyy-MM-dd')
-              .format(DateTime.parse(setupJourneyModel.dateOfBirth)),
-          'positions': setupJourneyModel.positions.toList(),
-          'kit_number': setupJourneyModel.kitNumber
-        }),
-      );
+      var request = http.MultipartRequest(
+          'PATCH', Uri.parse('${Constants.baseApiUrl}profile/'));
+      request.headers['Authorization'] = 'Token $token';
+
+      request.fields['username'] = setupJourneyModel.username;
+      request.fields['first_name'] = setupJourneyModel.firstName;
+      request.fields['last_name'] = setupJourneyModel.lastName;
+      request.fields['date_of_birth'] = DateFormat('yyyy-MM-dd')
+          .format(DateTime.parse(setupJourneyModel.dateOfBirth));
+      request.fields['positions'] =
+          jsonEncode(setupJourneyModel.positions.toList());
+      request.fields['kit_number'] = setupJourneyModel.kitNumber.toString();
+
+      final profilePicture = setupJourneyModel.profilePicture;
+      if (profilePicture != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'profile_picture',
+          profilePicture.path,
+          filename: basename(profilePicture.path),
+        ));
+      }
+
+      var response = await request.send();
 
       if (!context.mounted) return;
       if (response.statusCode == 200) {
