@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/material/colors.dart' as clr;
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/models/setup_journey_model.dart';
+import 'package:sidelines/views/profile_picture_and_username_view.dart';
 import 'package:sidelines/views/welcome_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../deprecated/screens/setup_journey/personal_info_screen.dart';
 import '../deprecated/screens/setup_journey/player_info_screen.dart';
-import '../deprecated/screens/setup_journey/username_screen.dart';
 import '../exceptions/runtime_exception.dart';
 import '../viewmodels/setup_journey_view_model.dart';
 import '../widgets/footers/setup_journey_footer.dart';
@@ -24,7 +24,7 @@ class SetupJourneyViewState extends State<SetupJourneyView> {
   final SetupJourneyViewModel viewModel = SetupJourneyViewModel();
   final PageController _pageController = PageController();
 
-  File? _profilePictureController;
+  File? _profilePicture;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -57,9 +57,15 @@ class SetupJourneyViewState extends State<SetupJourneyView> {
     super.dispose();
   }
 
+  void _updateProfilePicture(File? newProfilePicture) {
+    setState(() {
+      _profilePicture = newProfilePicture;
+    });
+  }
+
   Future<void> goToNextPage() async {
     SetupJourneyModel setupJourneyModel = SetupJourneyModel(
-      profilePicture: _profilePictureController,
+      profilePicture: _profilePicture,
       username: _usernameController.text,
       firstName: _firstNameController.text,
       lastName: _lastNameController.text,
@@ -124,7 +130,11 @@ class SetupJourneyViewState extends State<SetupJourneyView> {
             controller: _pageController,
             children: [
               const WelcomeView(),
-              UsernameScreen(usernameController: _usernameController),
+              ProfilePictureAndUsernameView(
+                usernameController: _usernameController,
+                currentProfilePicture: _profilePicture,
+                onProfilePictureSelected: _updateProfilePicture,
+              ),
               PersonalInfoScreen(
                   firstNameController: _firstNameController,
                   lastNameController: _lastNameController,

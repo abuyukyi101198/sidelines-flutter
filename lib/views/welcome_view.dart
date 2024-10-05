@@ -32,8 +32,8 @@ class WelcomeView extends StatelessWidget {
             ),
           ),
           Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
+            child: SafeArea(
+              minimum: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.end,

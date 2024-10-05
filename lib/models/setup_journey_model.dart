@@ -40,6 +40,9 @@ class SetupJourneyModel {
   Future<void> _validateProfilePictureAndUsername() async {
     List<String> errors = [];
 
+    if (profilePicture == null) {
+      errors.add('Please select a profile picture.');
+    }
     if (username.isEmpty) {
       errors.add('Please enter a username.');
     } else {
