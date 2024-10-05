@@ -43,7 +43,7 @@ class LabeledTextField extends StatelessWidget {
           onChanged: onChanged,
         ),
         const SizedBox(
-          height: 12.0,
+          height: 16.0,
         ),
       ],
     );
