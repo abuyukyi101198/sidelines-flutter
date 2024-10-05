@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:sidelines/data/storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:sidelines/deprecated/widgets/alerts/notification_bar.dart';
+import 'package:sidelines/widgets/notifications/notification_bar.dart';
 import 'package:sidelines/exceptions/api_exception.dart';
 import 'package:sidelines/exceptions/validation_exception.dart';
 

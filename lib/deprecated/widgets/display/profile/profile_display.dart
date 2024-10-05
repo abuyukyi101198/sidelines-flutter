@@ -9,7 +9,7 @@ import '../../../../data/constants.dart';
 import '../../../../data/storage.dart';
 import '../../../providers/profile_provider.dart';
 import '../../../utils/color_palette.dart';
-import '../../alerts/notification_bar.dart';
+import '../../../../widgets/notifications/notification_bar.dart';
 import '../../badges/rating_badge.dart';
 
 class ProfileDisplay extends StatefulWidget {

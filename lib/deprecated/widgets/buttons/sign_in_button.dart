@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../../data/constants.dart';
 import '../../../data/storage.dart';
-import '../alerts/notification_bar.dart';
+import '../../../widgets/notifications/notification_bar.dart';
 
 class SignInButton extends StatelessWidget {
   final TextEditingController emailController;

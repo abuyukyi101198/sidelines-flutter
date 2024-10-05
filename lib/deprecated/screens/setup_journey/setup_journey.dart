@@ -10,7 +10,7 @@ import 'dart:convert';
 import '../../../data/constants.dart';
 import '../../../data/storage.dart';
 import '../../utils/color_palette.dart';
-import '../../widgets/alerts/notification_bar.dart';
+import '../../../widgets/notifications/notification_bar.dart';
 import '../../widgets/footers/setup_journey_footer.dart';
 
 class SetupJourney extends StatefulWidget {

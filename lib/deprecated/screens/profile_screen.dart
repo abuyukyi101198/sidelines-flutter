@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../data/constants.dart';
 import '../../data/storage.dart';
 import '../providers/profile_provider.dart';
-import '../widgets/alerts/notification_bar.dart';
+import '../../widgets/notifications/notification_bar.dart';
 import '../widgets/display/profile/name_display.dart';
 import '../widgets/display/profile/performance_chart.dart';
 import '../widgets/display/profile/profile_display.dart';
