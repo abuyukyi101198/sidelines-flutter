@@ -16,7 +16,6 @@ class ProfilePictureAndUsernameView extends StatefulWidget {
     required this.onProfilePictureSelected,
   });
 
-
   @override
   ProfilePictureAndUsernameViewState createState() =>
       ProfilePictureAndUsernameViewState();
@@ -58,7 +57,7 @@ class ProfilePictureAndUsernameViewState
                 height: 90,
               ),
               Text(
-                'Choose a username',
+                'Profile Picture and Username',
                 style: TextStyle(
                   color: GlobalTheme.colors.textColor,
                   fontSize: 16,
@@ -66,7 +65,7 @@ class ProfilePictureAndUsernameViewState
               ),
               const SizedBox(height: 12),
               Text(
-                'Having a username will help your friends to find your profile.',
+                'Having a profile picture and username will help your friends to find your profile.',
                 style: TextStyle(
                   color: GlobalTheme.colors.textColor,
                   fontSize: 12,

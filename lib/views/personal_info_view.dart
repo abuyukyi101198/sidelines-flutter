@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/data/theme.dart';
 import '../../widgets/fields/date_field.dart';
 import '../widgets/fields/labeled_text_field.dart';
 
@@ -27,20 +28,20 @@ class PersonalInfoView extends StatelessWidget {
                 const SizedBox(
                   height: 90,
                 ),
-                const Text(
+                Text(
                   'Personal Information',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: GlobalTheme.colors.textColor,
                     fontSize: 16,
                   ),
                 ),
                 const SizedBox(
                   height: 12,
                 ),
-                const Text(
+                Text(
                   'In addition to your full name, a date of birth will help find friends and arrange matches within your age bracket.',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: GlobalTheme.colors.textColor,
                     fontSize: 12,
                   ),
                 ),
