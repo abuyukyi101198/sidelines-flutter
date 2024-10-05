@@ -42,7 +42,7 @@ class SignUpView extends StatelessWidget {
               ),
               LabeledTextField(
                 label: 'Re-enter your password',
-                controller: passwordController,
+                controller: confirmPasswordController,
                 textInputType: TextInputType.visiblePassword,
               ),
               const SizedBox(
@@ -50,8 +50,8 @@ class SignUpView extends StatelessWidget {
               ),
               FilledButton(
                 onPressed: () {
-                  viewModel.signUp(
-                      context, emailController.text, passwordController.text);
+                  viewModel.signUp(context, emailController.text,
+                      passwordController.text, confirmPasswordController.text);
                 },
                 child: const Text('Sign up'),
               ),

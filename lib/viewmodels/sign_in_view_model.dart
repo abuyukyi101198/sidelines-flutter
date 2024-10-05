@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/deprecated/widgets/alerts/notification_bar.dart';
 import 'package:sidelines/exceptions/api_exception.dart';
+import 'package:sidelines/exceptions/runtime_exception.dart';
+import 'package:sidelines/exceptions/validation_exception.dart';
 
 import '../data/constants.dart';
 
@@ -14,11 +16,26 @@ class SignInViewModel extends ChangeNotifier {
 
   ValueNotifier<bool> isLoading = ValueNotifier(false);
 
+  void validate(String usernameOrEmail, String password) {
+    List<String> errors = [];
+    if (usernameOrEmail.isEmpty) {
+      errors.add('Please enter your username or email.');
+    }
+    if (password.isEmpty) {
+      errors.add('Please enter your password.');
+    }
+
+    if (errors.isNotEmpty) {
+      throw ValidationException(errors);
+    }
+  }
+
   Future<void> signIn(
       BuildContext context, String usernameOrEmail, String password) async {
     isLoading.value = true;
 
     try {
+      validate(usernameOrEmail, password);
       response = await http.post(
         Uri.parse('${Constants.baseApiUrl}sign-in/'),
         headers: {'Content-Type': 'application/json'},
@@ -38,7 +55,11 @@ class SignInViewModel extends ChangeNotifier {
       }
     } catch (error) {
       if (!context.mounted) return;
-      NotificationBar.show(context, error.toString());
+      if (error is RuntimeException) {
+        NotificationBar.show(context, error.messages.first);
+      } else {
+        NotificationBar.show(context, 'An unexpected error occurred.');
+      }
     } finally {
       isLoading.value = false;
     }
