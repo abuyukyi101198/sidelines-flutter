@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/material/colors.dart' as clr;
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/models/setup_journey_model.dart';
+import 'package:sidelines/views/personal_info_view.dart';
 import 'package:sidelines/views/profile_picture_and_username_view.dart';
 import 'package:sidelines/views/welcome_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../deprecated/screens/setup_journey/personal_info_screen.dart';
 import '../deprecated/screens/setup_journey/player_info_screen.dart';
 import '../exceptions/runtime_exception.dart';
 import '../viewmodels/setup_journey_view_model.dart';
@@ -135,10 +135,11 @@ class SetupJourneyViewState extends State<SetupJourneyView> {
                 currentProfilePicture: _profilePicture,
                 onProfilePictureSelected: _updateProfilePicture,
               ),
-              PersonalInfoScreen(
-                  firstNameController: _firstNameController,
-                  lastNameController: _lastNameController,
-                  dateOfBirthController: _dateOfBirthController),
+              PersonalInfoView(
+                firstNameController: _firstNameController,
+                lastNameController: _lastNameController,
+                dateOfBirthController: _dateOfBirthController,
+              ),
               PlayerInfoScreen(
                 positionController: _positionController,
                 kitNumberController: _kitNumberController,

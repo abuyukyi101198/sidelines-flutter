@@ -97,7 +97,7 @@ class ProfilePictureAndUsernameViewState
                 style: TextStyle(
                     color: GlobalTheme.colors.textColor, fontSize: 12),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 24),
               LabeledTextField(
                 label: 'Username/E-mail',
                 controller: widget.usernameController,
