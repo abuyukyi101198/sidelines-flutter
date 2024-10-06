@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/models/sign_in_model.dart';
 import 'package:sidelines/widgets/notifications/notification_bar.dart';
@@ -8,6 +9,7 @@ import 'package:sidelines/exceptions/api_exception.dart';
 import 'package:sidelines/exceptions/runtime_exception.dart';
 
 import '../data/constants.dart';
+import '../providers/profile_provider.dart';
 
 class SignInViewModel extends ChangeNotifier {
   final Storage storage = Storage();
@@ -33,7 +35,7 @@ class SignInViewModel extends ChangeNotifier {
       if (!context.mounted) return;
       switch (response?.statusCode) {
         case 200:
-          onSuccess(context);
+          onSuccess(context, response);
           break;
         case 206:
           onPartialSuccess(context);
@@ -53,12 +55,15 @@ class SignInViewModel extends ChangeNotifier {
     }
   }
 
-  void onSuccess(BuildContext context) async {
+  void onSuccess(BuildContext context, http.Response? response) async {
     Navigator.of(context).pushNamedAndRemoveUntil(
       '/matches',
       (Route<dynamic> route) => false,
     );
-    await storage.write('token', jsonDecode(response!.body)['token']);
+    final data = jsonDecode(response!.body);
+    final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+    profileProvider.setProfilePictureUrl(data['profile']['profile_picture']);
+    await storage.write('token', data['token']);
   }
 
   void onPartialSuccess(BuildContext context) async {

@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 import 'package:sidelines/data/storage.dart';
 import 'package:sidelines/exceptions/api_exception.dart';
 import 'package:sidelines/models/setup_journey_model.dart';
 
 import '../data/constants.dart';
 import '../exceptions/runtime_exception.dart';
+import '../providers/profile_provider.dart';
 import '../widgets/notifications/notification_bar.dart';
 
 class SetupJourneyViewModel extends ChangeNotifier {
@@ -54,14 +56,12 @@ class SetupJourneyViewModel extends ChangeNotifier {
         ));
       }
 
-      var response = await request.send();
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
 
       if (!context.mounted) return;
       if (response.statusCode == 200) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/matches',
-          (Route<dynamic> route) => false,
-        );
+        onSuccess(context, response);
       } else {
         throw ApiException(response);
       }
@@ -75,5 +75,15 @@ class SetupJourneyViewModel extends ChangeNotifier {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void onSuccess(BuildContext context, http.Response? response) async {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      '/matches',
+          (Route<dynamic> route) => false,
+    );
+    final data = jsonDecode(response!.body);
+    final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+    profileProvider.setProfilePictureUrl(data['profile_picture']);
   }
 }
