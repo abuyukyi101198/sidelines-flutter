@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/profile_provider.dart';
+import '../../../providers/profile_provider.dart';
 import '../../utils/color_palette.dart';
 import 'navigation_item.dart';
 
