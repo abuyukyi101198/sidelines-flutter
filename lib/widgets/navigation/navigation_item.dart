@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../utils/color_palette.dart';
+import '../../data/theme.dart';
 
 class NavigationItem extends BottomNavigationBarItem {
   NavigationItem({
@@ -11,13 +11,13 @@ class NavigationItem extends BottomNavigationBarItem {
             icon: _generateIcon(iconPath),
             activeIcon: _generateActiveIcon(iconPath),
             label: '',
-            backgroundColor: ColorPalette.backgroundColor);
+            backgroundColor: GlobalTheme.colors.backgroundColor);
 
   static Widget _generateIcon(String iconPath) {
     return SvgPicture.asset(
       iconPath,
       colorFilter:
-          const ColorFilter.mode(ColorPalette.secondaryColor, BlendMode.srcIn),
+          ColorFilter.mode(GlobalTheme.colors.secondaryColor, BlendMode.srcIn),
     );
   }
 
@@ -25,7 +25,7 @@ class NavigationItem extends BottomNavigationBarItem {
     return SvgPicture.asset(
       iconPath,
       colorFilter:
-          const ColorFilter.mode(ColorPalette.primaryColor, BlendMode.srcIn),
+          ColorFilter.mode(GlobalTheme.colors.primaryColor, BlendMode.srcIn),
     );
   }
 }

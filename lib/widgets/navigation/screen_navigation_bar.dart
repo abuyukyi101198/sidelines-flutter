@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sidelines/data/theme.dart';
+import 'package:sidelines/data/theme.dart';
 import '../../../providers/profile_provider.dart';
-import '../../utils/color_palette.dart';
 import 'navigation_item.dart';
 
 class ScreenNavigationBar extends StatelessWidget {
@@ -62,9 +63,9 @@ class ScreenNavigationBar extends StatelessWidget {
             height: 28,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorPalette.secondaryColor,
+              color: GlobalTheme.colors.secondaryColor,
               border: currentIndex == 4 ? Border.all(
-                color: ColorPalette.primaryColor,
+                color: GlobalTheme.colors.primaryColor,
                 width: 2.0,
                 style: BorderStyle.solid,
                 strokeAlign: BorderSide.strokeAlignOutside,

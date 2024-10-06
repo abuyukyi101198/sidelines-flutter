@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../widgets/navigation/screen_navigation_bar.dart';
 import '../utils/color_palette.dart';
 import '../widgets/display/team_badge.dart';
 import '../widgets/display/upcoming_match_card.dart';
-import '../widgets/navigation/screen_navigation_bar.dart';
 
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({super.key});
