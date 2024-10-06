@@ -5,6 +5,7 @@ import 'package:sidelines/providers/profile_provider.dart';
 import 'package:sidelines/views/setup_journey_view.dart';
 import 'package:sidelines/views/sign_in_view.dart';
 import 'package:sidelines/views/sign_up_view.dart';
+import 'package:sidelines/views/splash_screen_view.dart';
 
 import 'deprecated/screens/matches_screen.dart';
 import 'deprecated/screens/profile_screen.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
             dividerColor: GlobalTheme.colors.textColor,
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
                 backgroundColor: GlobalTheme.colors.backgroundColor)),
-        home: SignInView(),
+        home: const SplashScreen(), // Show splash first
         onGenerateRoute: (settings) {
           WidgetBuilder builder;
           switch (settings.name) {
@@ -80,7 +81,8 @@ class MyApp extends StatelessWidget {
               throw Exception('Invalid route: ${settings.name}');
           }
           return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => builder(context),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                builder(context),
             transitionDuration: Duration.zero,
             reverseTransitionDuration: Duration.zero,
           );

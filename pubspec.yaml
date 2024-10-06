@@ -102,6 +102,7 @@ flutter:
 
   assets:
     - assets/logo.svg
+    - assets/icon.svg
     - assets/google.svg
     - assets/apple.svg
     - assets/icons/arrange.svg
