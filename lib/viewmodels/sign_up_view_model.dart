@@ -14,11 +14,7 @@ class SignUpViewModel extends ChangeNotifier {
 
   http.Response? response;
 
-  ValueNotifier<bool> isLoading = ValueNotifier(false);
-
   Future<void> signUp(BuildContext context, SignUpModel signUpModel) async {
-    isLoading.value = true;
-
     try {
       signUpModel.validate();
       response = await http.post(
@@ -43,8 +39,6 @@ class SignUpViewModel extends ChangeNotifier {
       } else {
         NotificationBar.show(context, 'An unexpected error occurred.');
       }
-    } finally {
-      isLoading.value = false;
     }
   }
 

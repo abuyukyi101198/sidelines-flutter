@@ -19,8 +19,6 @@ class SetupJourneyViewModel extends ChangeNotifier {
 
   http.Response? response;
 
-  ValueNotifier<bool> isLoading = ValueNotifier(false);
-
   Future<void> validate(
       int currentIndex, SetupJourneyModel setupJourneyModel) async {
     await setupJourneyModel.validate(currentIndex);
@@ -28,8 +26,6 @@ class SetupJourneyViewModel extends ChangeNotifier {
 
   Future<void> patchProfile(BuildContext context, int currentIndex,
       SetupJourneyModel setupJourneyModel) async {
-    isLoading.value = true;
-
     try {
       setupJourneyModel.validate(currentIndex);
 
@@ -72,8 +68,6 @@ class SetupJourneyViewModel extends ChangeNotifier {
       } else {
         NotificationBar.show(context, 'An unexpected error occurred.');
       }
-    } finally {
-      isLoading.value = false;
     }
   }
 

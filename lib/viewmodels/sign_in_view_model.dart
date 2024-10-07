@@ -16,11 +16,7 @@ class SignInViewModel extends ChangeNotifier {
 
   http.Response? response;
 
-  ValueNotifier<bool> isLoading = ValueNotifier(false);
-
   Future<void> signIn(BuildContext context, SignInModel signInModel) async {
-    isLoading.value = true;
-
     try {
       signInModel.validate();
       response = await http.post(
@@ -50,8 +46,6 @@ class SignInViewModel extends ChangeNotifier {
       } else {
         NotificationBar.show(context, 'An unexpected error occurred.');
       }
-    } finally {
-      isLoading.value = false;
     }
   }
 
