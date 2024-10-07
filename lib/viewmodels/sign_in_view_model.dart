@@ -56,21 +56,23 @@ class SignInViewModel extends ChangeNotifier {
   }
 
   void onSuccess(BuildContext context, http.Response? response) async {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-      '/matches',
-      (Route<dynamic> route) => false,
-    );
     final data = jsonDecode(response!.body);
     final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
     profileProvider.setProfilePictureUrl(data['profile']['profile_picture']);
     await storage.write('token', data['token']);
+    if (!context.mounted) return;
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      '/matches',
+      (Route<dynamic> route) => false,
+    );
   }
 
   void onPartialSuccess(BuildContext context) async {
+    await storage.write('token', jsonDecode(response!.body)['token']);
+    if (!context.mounted) return;
     Navigator.of(context).pushNamedAndRemoveUntil(
       '/setup-journey',
       (Route<dynamic> route) => false,
     );
-    await storage.write('token', jsonDecode(response!.body)['token']);
   }
 }
