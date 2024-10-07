@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:sidelines/exceptions/api_exception.dart';
 import '../data/constants.dart';
 import '../data/storage.dart';
 import '../models/profile_model.dart';
@@ -24,14 +25,18 @@ class ProfileViewModel {
         ProfileModel profile = ProfileModel.fromJson(data);
         _profileProvider.setProfile(profile);
       } else {
-        // Handle error
+        throw ApiException(response);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
   Future<void> refreshProfile() async {
-    await fetchProfile();
+    try {
+      await fetchProfile();
+    } catch (error) {
+      rethrow;
+    }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/profile_provider.dart';
 import '../viewmodels/profile_view_model.dart';
 import '../deprecated/widgets/display/profile/name_display.dart';
@@ -18,26 +17,24 @@ class ProfileView extends StatefulWidget {
 }
 
 class ProfileViewState extends State<ProfileView> {
-  late ProfileProvider profileProvider;
   late ProfileViewModel profileViewModel;
   late Future<void> _profileFuture;
 
   @override
   void initState() {
     super.initState();
-    profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+    final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
     profileViewModel = ProfileViewModel(profileProvider);
-
-    if (!profileProvider.profile!.isProfileComplete) {
-      _profileFuture = profileViewModel.fetchProfile();
-    } else {
-      _profileFuture = Future.value();
-    }
+    _profileFuture = profileProvider.profile!.isProfileComplete
+        ? Future.value()
+        : profileViewModel.fetchProfile();
   }
 
   Future<void> _refreshProfile() async {
-    await profileViewModel.refreshProfile(); // Refresh the profile
-    _profileFuture = Future.value(); // Ensure the future stays stable post-refresh
+    await profileViewModel.refreshProfile();
+    setState(() {
+      _profileFuture = Future.value();
+    });
   }
 
   @override
@@ -66,7 +63,7 @@ class ProfileViewState extends State<ProfileView> {
           }
 
           return RefreshIndicator(
-            onRefresh: _refreshProfile, // Handle refresh logic separately
+            onRefresh: _refreshProfile,
             child: ListView(
               children: [
                 ProfileDisplay(
