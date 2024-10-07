@@ -59,13 +59,17 @@ class ProfileViewState extends State<ProfileView> {
         future: _profileFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+                child: CircularProgressIndicator(
+              backgroundColor: GlobalTheme.colors.secondaryColor,
+              color: GlobalTheme.colors.primaryColor,
+            ));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
 
           return RefreshIndicator(
-            color: GlobalTheme.colors.secondaryColor,
+            color: GlobalTheme.colors.primaryColor,
             backgroundColor: GlobalTheme.colors.backgroundColor,
             onRefresh: _refreshProfile,
             child: ListView(
