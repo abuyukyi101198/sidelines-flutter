@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:sidelines/models/profile_model.dart';
 import '../data/constants.dart';
 import '../data/storage.dart';
 import '../providers/profile_provider.dart';
@@ -27,7 +28,8 @@ class AuthService {
       final profileProvider =
           Provider.of<ProfileProvider>(context, listen: false);
 
-      profileProvider.setProfilePictureUrl(data['profile']['profile_picture']);
+      ProfileModel profileModel = ProfileModel.fromJson(data['profile']);
+      profileProvider.setProfile(profileModel);
 
       return true;
     } else {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
-import 'package:sidelines/data/theme.dart';
 import '../../../providers/profile_provider.dart';
 import 'navigation_item.dart';
 
@@ -44,7 +43,7 @@ class ScreenNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profilePictureUrl =
-        Provider.of<ProfileProvider>(context).profilePictureUrl;
+        Provider.of<ProfileProvider>(context).profile?.profilePictureUrl;
 
     return BottomNavigationBar(
       currentIndex: currentIndex,

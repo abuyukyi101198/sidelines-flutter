@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/providers/profile_provider.dart';
+import 'package:sidelines/views/profile_view.dart';
 import 'package:sidelines/views/setup_journey_view.dart';
 import 'package:sidelines/views/sign_in_view.dart';
 import 'package:sidelines/views/sign_up_view.dart';
 import 'package:sidelines/views/splash_screen_view.dart';
 
 import 'deprecated/screens/matches_screen.dart';
-import 'deprecated/screens/profile_screen.dart';
 
 void main() {
   runApp(
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
             dividerColor: GlobalTheme.colors.textColor,
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
                 backgroundColor: GlobalTheme.colors.backgroundColor)),
-        home: const SplashScreen(), // Show splash first
+        home: const SplashScreen(),
         onGenerateRoute: (settings) {
           WidgetBuilder builder;
           switch (settings.name) {
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
               builder = (BuildContext _) => const MatchesScreen();
               break;
             case '/profile':
-              builder = (BuildContext _) => const ProfileScreen();
+              builder = (BuildContext _) => const ProfileView();
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');
