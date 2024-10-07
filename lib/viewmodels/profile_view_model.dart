@@ -27,7 +27,7 @@ class ProfileViewModel {
       } else {
         throw ApiException(response);
       }
-    } catch (e) {
+    } catch (error) {
       rethrow;
     }
   }

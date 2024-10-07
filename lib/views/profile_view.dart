@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sidelines/data/theme.dart';
+import 'package:sidelines/widgets/displays/profile_header.dart';
+import 'package:sidelines/widgets/displays/profile_info_display.dart';
+import 'package:sidelines/widgets/displays/profile_performance_chart.dart';
+import 'package:sidelines/widgets/displays/profile_statistics_display.dart';
 import '../providers/profile_provider.dart';
 import '../viewmodels/profile_view_model.dart';
-import '../deprecated/widgets/display/profile/name_display.dart';
-import '../deprecated/widgets/display/profile/performance_chart.dart';
-import '../deprecated/widgets/display/profile/profile_display.dart';
-import '../deprecated/widgets/display/profile/statistics_display.dart';
-import '../deprecated/widgets/display/profile/tag_display.dart';
 import '../widgets/navigation/screen_navigation_bar.dart';
 
 class ProfileView extends StatefulWidget {
@@ -23,7 +23,8 @@ class ProfileViewState extends State<ProfileView> {
   @override
   void initState() {
     super.initState();
-    final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
     profileViewModel = ProfileViewModel(profileProvider);
     _profileFuture = profileProvider.profile!.isProfileComplete
         ? Future.value()
@@ -43,6 +44,7 @@ class ProfileViewState extends State<ProfileView> {
 
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
@@ -63,34 +65,18 @@ class ProfileViewState extends State<ProfileView> {
           }
 
           return RefreshIndicator(
+            color: GlobalTheme.colors.secondaryColor,
+            backgroundColor: GlobalTheme.colors.backgroundColor,
             onRefresh: _refreshProfile,
             child: ListView(
               children: [
-                ProfileDisplay(
-                  overallRating: 6.0,
-                  profilePictureUrl: profileProvider.profile!.profilePictureUrl,
-                ),
+                ProfileHeader(profileModel: profileProvider.profile!),
+                ProfileInfoDisplay(profileModel: profileProvider.profile!),
+                ProfileStatisticsDisplay(
+                    profileModel: profileProvider.profile!),
                 const SizedBox(height: 24.0),
-                NameDisplay(
-                  firstName: profileProvider.profile!.firstName!,
-                  lastName: profileProvider.profile!.lastName!,
-                  username: profileProvider.profile!.username!,
-                ),
-                TagDisplay(
-                  positionData: profileProvider.profile!.formatPosition(),
-                  numberData: profileProvider.profile!.kitNumber.toString(),
-                  playedData: '12',
-                  ageData: profileProvider.profile!.calculateAge(),
-                  joinData: profileProvider.profile!.formatJoinDate(),
-                ),
-                StatisticsDisplay(
-                  goalsData: profileProvider.profile!.goals!,
-                  assistsData: profileProvider.profile!.assists!,
-                  mvpData: profileProvider.profile!.mvp!,
-                ),
-                const SizedBox(height: 24.0),
-                const PerformanceChart(
-                  ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 8.1],
+                const ProfilePerformanceChart(
+                  ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
                 ),
               ],
             ),
