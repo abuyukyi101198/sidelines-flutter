@@ -28,15 +28,11 @@ class ProfileViewModel {
         throw ApiException(response);
       }
     } catch (error) {
-      rethrow;
+      return Future.error(error);
     }
   }
 
   Future<void> refreshProfile() async {
-    try {
-      await fetchProfile();
-    } catch (error) {
-      rethrow;
-    }
+    return await fetchProfile();
   }
 }

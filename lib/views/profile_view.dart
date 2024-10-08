@@ -26,9 +26,15 @@ class ProfileViewState extends State<ProfileView> {
     final profileProvider =
         Provider.of<ProfileProvider>(context, listen: false);
     profileViewModel = ProfileViewModel(profileProvider);
-    _profileFuture = profileProvider.profile!.isProfileComplete
-        ? Future.value()
-        : profileViewModel.fetchProfile();
+    _profileFuture = Future.value();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!profileProvider.profile!.isProfileComplete) {
+        setState(() {
+          _profileFuture = profileViewModel.fetchProfile();
+        });
+      }
+    });
   }
 
   Future<void> _refreshProfile() async {
@@ -65,7 +71,15 @@ class ProfileViewState extends State<ProfileView> {
               color: GlobalTheme.colors.primaryColor,
             ));
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+                child: IconButton(
+              onPressed: _refreshProfile,
+              icon: Icon(
+                Icons.refresh_rounded,
+                color: GlobalTheme.colors.primaryColor,
+                size: 36.0,
+              ),
+            ));
           }
 
           return RefreshIndicator(
