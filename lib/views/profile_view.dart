@@ -38,7 +38,7 @@ class ProfileViewState extends State<ProfileView> {
   }
 
   Future<void> _refreshProfile() async {
-    await profileViewModel.refreshProfile();
+    await profileViewModel.fetchProfile();
     setState(() {
       _profileFuture = Future.value();
     });
@@ -82,23 +82,25 @@ class ProfileViewState extends State<ProfileView> {
             ));
           }
 
-          return RefreshIndicator(
-            color: GlobalTheme.colors.primaryColor,
-            backgroundColor: GlobalTheme.colors.backgroundColor,
-            onRefresh: _refreshProfile,
-            child: ListView(
-              children: [
-                ProfileHeader(profileModel: profileProvider.profile!),
-                ProfileInfoDisplay(profileModel: profileProvider.profile!),
-                ProfileStatisticsDisplay(
-                    profileModel: profileProvider.profile!),
-                const SizedBox(height: 24.0),
-                const ProfilePerformanceChart(
-                  ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
+          return SafeArea(
+              minimum: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: RefreshIndicator(
+                color: GlobalTheme.colors.primaryColor,
+                backgroundColor: GlobalTheme.colors.backgroundColor,
+                onRefresh: _refreshProfile,
+                child: ListView(
+                  children: [
+                    ProfileHeader(profileModel: profileProvider.profile!),
+                    ProfileInfoDisplay(profileModel: profileProvider.profile!),
+                    ProfileStatisticsDisplay(
+                        profileModel: profileProvider.profile!),
+                    const SizedBox(height: 24.0),
+                    const ProfilePerformanceChart(
+                      ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
+              ));
         },
       ),
       bottomNavigationBar: const ScreenNavigationBar(currentIndex: 4),

@@ -31,8 +31,4 @@ class ProfileViewModel {
       return Future.error(error);
     }
   }
-
-  Future<void> refreshProfile() async {
-    return await fetchProfile();
-  }
 }
