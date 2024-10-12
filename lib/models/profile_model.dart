@@ -13,6 +13,7 @@ class ProfileModel {
   final int? goals;
   final int? assists;
   final int? mvp;
+  final bool? isTeammate;
 
   ProfileModel({
     this.overallRating,
@@ -27,6 +28,7 @@ class ProfileModel {
     this.goals,
     this.assists,
     this.mvp,
+    this.isTeammate,
   });
 
   bool get isProfileComplete {
@@ -60,6 +62,7 @@ class ProfileModel {
       goals: json['goals'] as int?,
       assists: json['assists'] as int?,
       mvp: json['mvp'] as int?,
+      isTeammate: json['is_teammate'] as bool?,
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/deprecated/widgets/buttons/link_button.dart';
 import 'package:sidelines/widgets/badges/friend_badge.dart';
 import '../../data/theme.dart';
 import '../../models/profile_model.dart';
@@ -11,6 +10,15 @@ class FriendListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> badges = [
+      FriendBadge(label: profileModel.formatPosition()),
+    ];
+
+    if (profileModel.isTeammate != null && profileModel.isTeammate!) {
+      badges.add(const SizedBox(width: 4.0));
+      badges.add(FriendBadge(label: 'Teammate'));
+    }
+
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -45,24 +53,24 @@ class FriendListItem extends StatelessWidget {
                   ),
                   maxLines: 1,
                 ),
-                const SizedBox(height: 6.0,),
-                Row(
-                  children: [
-                    FriendBadge(label: profileModel.formatPosition()),
-                    const SizedBox(width: 4.0),
-                    FriendBadge(label: 'Teammate'),
-                  ],
+                const SizedBox(
+                  height: 6.0,
                 ),
+                Text(
+                  '@${profileModel.username}',
+                  style: TextStyle(
+                    color: GlobalTheme.colors.secondaryColor,
+                    fontSize: 10.0,
+                  ),
+                )
               ],
             ),
           ),
           const SizedBox(width: 16.0),
           Align(
             alignment: Alignment.centerRight,
-            child: LinkButton(
-              onPressed: () {},
-              label: 'View Profile',
-              fontSize: 10.0,
+            child: Row(
+              children: badges,
             ),
           ),
         ],

@@ -18,9 +18,10 @@ class FriendsView extends StatefulWidget {
 class FriendsViewState extends State<FriendsView> {
   late FriendsViewModel friendsViewModel;
   late Future<void> _friendsFuture;
+  Future<void>? _searchFuture;
+
   String searchQuery = "";
   bool isSearching = false;
-  Future<void>? _searchFuture;
 
   @override
   void initState() {
@@ -56,7 +57,7 @@ class FriendsViewState extends State<FriendsView> {
     setState(() {
       isSearching = false;
       searchQuery = "";
-      _searchFuture = null; // Clear search results when search is canceled
+      _searchFuture = null;
     });
   }
 
