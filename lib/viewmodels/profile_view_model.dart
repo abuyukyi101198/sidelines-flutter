@@ -23,7 +23,28 @@ class ProfileViewModel {
         final data = json.decode(utf8.decode(response.bodyBytes));
 
         ProfileModel profile = ProfileModel.fromJson(data);
-        _profileProvider.setProfile(profile);
+        _profileProvider.setCurrentProfile(profile);
+      } else {
+        throw ApiException(response);
+      }
+    } catch (error) {
+      return Future.error(error);
+    }
+  }
+
+  Future<void> fetchProfileById(int id) async {
+    try {
+      final token = await Storage().read('token');
+      final response = await http.get(
+        Uri.parse('${Constants.baseApiUrl}profile/$id/'),
+        headers: {'Authorization': 'Token $token'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(utf8.decode(response.bodyBytes));
+
+        ProfileModel profile = ProfileModel.fromJson(data);
+        _profileProvider.setViewedProfile(profile);
       } else {
         throw ApiException(response);
       }

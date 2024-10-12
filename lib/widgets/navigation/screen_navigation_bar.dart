@@ -43,7 +43,7 @@ class ScreenNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profilePictureUrl =
-        Provider.of<ProfileProvider>(context).profile?.profilePictureUrl;
+        Provider.of<ProfileProvider>(context).currentProfile?.profilePictureUrl;
 
     return BottomNavigationBar(
       currentIndex: currentIndex,

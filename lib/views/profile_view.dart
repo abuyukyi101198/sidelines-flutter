@@ -12,7 +12,9 @@ import '../viewmodels/profile_view_model.dart';
 import '../widgets/navigation/screen_navigation_bar.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+  final int? profileId;
+
+  const ProfileView({super.key, this.profileId});
 
   @override
   ProfileViewState createState() => ProfileViewState();
@@ -31,7 +33,11 @@ class ProfileViewState extends State<ProfileView> {
     _profileFuture = Future.value();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!profileProvider.profile!.isProfileComplete) {
+      if (widget.profileId != null) {
+        setState(() {
+          _profileFuture = profileViewModel.fetchProfileById(widget.profileId!);
+        });
+      } else if (!profileProvider.currentProfile!.isProfileComplete) {
         setState(() {
           _profileFuture = profileViewModel.fetchProfile();
         });
@@ -46,34 +52,33 @@ class ProfileViewState extends State<ProfileView> {
     });
   }
 
-  // TODO: Replace with actual logout later on
   Future<void> _logout() async {
-    // Clear token from storage
     await Storage().delete('token');
-
+    if (!mounted) return;
     Provider.of<ProfileProvider>(context, listen: false).clearProfile();
     Provider.of<FriendsProvider>(context, listen: false).clearFriends();
-
-    // Navigate back to the login screen
     Navigator.of(context).pushReplacementNamed('/sign-in');
   }
 
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileProvider>(context);
+    final List<Widget>? actions = widget.profileId == null
+        ? [
+            Padding(
+              padding: const EdgeInsets.only(right: 6.0),
+              child: IconButton(
+                onPressed: _logout,
+                icon: const Icon(Icons.logout_rounded),
+              ),
+            ),
+          ]
+        : null;
 
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 6.0),
-            child: IconButton(
-              onPressed: _logout,
-              icon: const Icon(Icons.logout_rounded),
-            ),
-          ),
-        ],
+        actions: actions,
       ),
       body: FutureBuilder(
         future: _profileFuture,
@@ -96,6 +101,10 @@ class ProfileViewState extends State<ProfileView> {
             ));
           }
 
+          final displayedProfile = widget.profileId != null
+              ? profileProvider.viewedProfile
+              : profileProvider.currentProfile;
+
           return SafeArea(
               minimum: const EdgeInsets.symmetric(horizontal: 20.0),
               child: RefreshIndicator(
@@ -104,10 +113,9 @@ class ProfileViewState extends State<ProfileView> {
                 onRefresh: _refreshProfile,
                 child: ListView(
                   children: [
-                    ProfileHeader(profileModel: profileProvider.profile!),
-                    ProfileInfoDisplay(profileModel: profileProvider.profile!),
-                    ProfileStatisticsDisplay(
-                        profileModel: profileProvider.profile!),
+                    ProfileHeader(profileModel: displayedProfile!),
+                    ProfileInfoDisplay(profileModel: displayedProfile),
+                    ProfileStatisticsDisplay(profileModel: displayedProfile),
                     const SizedBox(height: 24.0),
                     const ProfilePerformanceChart(
                       ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
@@ -117,7 +125,8 @@ class ProfileViewState extends State<ProfileView> {
               ));
         },
       ),
-      bottomNavigationBar: const ScreenNavigationBar(currentIndex: 4),
+      bottomNavigationBar:
+          ScreenNavigationBar(currentIndex: widget.profileId != null ? 3 : 4),
     );
   }
 }

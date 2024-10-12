@@ -29,7 +29,7 @@ class AuthService {
           Provider.of<ProfileProvider>(context, listen: false);
 
       ProfileModel profileModel = ProfileModel.fromJson(data['profile']);
-      profileProvider.setProfile(profileModel);
+      profileProvider.setCurrentProfile(profileModel);
 
       return true;
     } else {
