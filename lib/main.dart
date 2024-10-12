@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
+import 'package:sidelines/providers/friends_provider.dart';
 import 'package:sidelines/providers/profile_provider.dart';
+import 'package:sidelines/views/friends_view.dart';
 import 'package:sidelines/views/profile_view.dart';
 import 'package:sidelines/views/setup_journey_view.dart';
 import 'package:sidelines/views/sign_in_view.dart';
@@ -14,6 +16,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => FriendsProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: const MyApp(),
@@ -73,6 +76,9 @@ class MyApp extends StatelessWidget {
               break;
             case '/matches':
               builder = (BuildContext _) => const MatchesScreen();
+              break;
+            case '/friends':
+              builder = (BuildContext _) => const FriendsView();
               break;
             case '/profile':
               builder = (BuildContext _) => const ProfileView();
