@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 class ProfileModel {
+  final int? id;
   final double? overallRating;
   final String? profilePictureUrl;
   final String? firstName;
@@ -16,6 +17,7 @@ class ProfileModel {
   final bool? isTeammate;
 
   ProfileModel({
+    this.id,
     this.overallRating,
     this.profilePictureUrl,
     this.firstName,
@@ -48,6 +50,7 @@ class ProfileModel {
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
+      id: json['id'] as int?,
       overallRating: json['overall_rating'] as double?,
       profilePictureUrl: json['profile_picture'] as String?,
       firstName: json['first_name'] as String?,
