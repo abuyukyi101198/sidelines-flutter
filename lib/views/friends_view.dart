@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sidelines/views/profile_search_view.dart';
 import 'package:sidelines/widgets/items/friend_list_item.dart';
 import '../data/theme.dart';
 import '../providers/friends_provider.dart';
@@ -80,57 +79,35 @@ class FriendsViewState extends State<FriendsView> {
 
           final friends = friendsProvider.friends;
 
-          return Stack(
-            children: [
-              SafeArea(
-                minimum: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: RefreshIndicator(
-                  color: GlobalTheme.colors.primaryColor,
-                  backgroundColor: GlobalTheme.colors.backgroundColor,
-                  onRefresh: _refreshFriends,
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.only(left: 8.0, top: 16.0, right: 8.0),
-                    itemCount: friends.isEmpty ? 1 : friends.length,
-                    itemBuilder: (context, index) {
-                      if (friends.isEmpty) {
-                        return Center(
-                          child: Text(
-                            'No friends found.',
-                            style: TextStyle(
-                              color: GlobalTheme.colors.primaryColor,
-                            ),
-                          ),
-                        );
-                      }
+          return SafeArea(
+            minimum: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: RefreshIndicator(
+              color: GlobalTheme.colors.primaryColor,
+              backgroundColor: GlobalTheme.colors.backgroundColor,
+              onRefresh: _refreshFriends,
+              child: ListView.builder(
+                padding:
+                    const EdgeInsets.only(left: 8.0, top: 16.0, right: 8.0),
+                itemCount: friends.isEmpty ? 1 : friends.length,
+                itemBuilder: (context, index) {
+                  if (friends.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No friends found.',
+                        style: TextStyle(
+                          color: GlobalTheme.colors.primaryColor,
+                        ),
+                      ),
+                    );
+                  }
 
-                      ProfileModel friend = friends[index];
-                      return FriendListItem(
-                        profileModel: friend,
-                      );
-                    },
-                  ),
-                ),
+                  ProfileModel friend = friends[index];
+                  return FriendListItem(
+                    profileModel: friend,
+                  );
+                },
               ),
-              Positioned(
-                bottom: 20.0, // Adjust the distance from the bottom
-                left: 20.0,
-                right: 20.0,
-                child: SizedBox(
-                  width: double.infinity, // Ensure button spans full width
-                  child: FilledButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfileSearchView()),
-                      );
-                    },
-                    child: const Text('Add a Friend'),
-                  ),
-                ),
-              ),
-            ],
+            ),
           );
         },
       ),
