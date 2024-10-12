@@ -98,7 +98,7 @@ class ProfilePictureAndUsernameViewState
               ),
               const SizedBox(height: 24),
               LabeledTextField(
-                label: 'Username/E-mail',
+                label: 'Username',
                 controller: widget.usernameController,
               ),
             ],

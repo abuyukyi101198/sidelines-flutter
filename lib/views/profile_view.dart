@@ -5,6 +5,7 @@ import 'package:sidelines/widgets/displays/profile_header.dart';
 import 'package:sidelines/widgets/displays/profile_info_display.dart';
 import 'package:sidelines/widgets/displays/profile_performance_chart.dart';
 import 'package:sidelines/widgets/displays/profile_statistics_display.dart';
+import '../data/storage.dart';
 import '../providers/profile_provider.dart';
 import '../viewmodels/profile_view_model.dart';
 import '../widgets/navigation/screen_navigation_bar.dart';
@@ -44,6 +45,15 @@ class ProfileViewState extends State<ProfileView> {
     });
   }
 
+  // TODO: Replace with actual logout later on
+  Future<void> _logout() async {
+    // Clear token from storage
+    await Storage().delete('token');
+
+    // Navigate back to the login screen
+    Navigator.of(context).pushReplacementNamed('/sign-in');
+  }
+
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileProvider>(context);
@@ -55,8 +65,8 @@ class ProfileViewState extends State<ProfileView> {
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
             child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.ios_share),
+              onPressed: _logout,
+              icon: const Icon(Icons.logout_rounded),
             ),
           ),
         ],
