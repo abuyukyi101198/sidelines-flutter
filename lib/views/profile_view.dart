@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
+import 'package:sidelines/providers/friends_provider.dart';
 import 'package:sidelines/widgets/displays/profile_header.dart';
 import 'package:sidelines/widgets/displays/profile_info_display.dart';
 import 'package:sidelines/widgets/displays/profile_performance_chart.dart';
@@ -49,6 +50,9 @@ class ProfileViewState extends State<ProfileView> {
   Future<void> _logout() async {
     // Clear token from storage
     await Storage().delete('token');
+
+    Provider.of<ProfileProvider>(context, listen: false).clearProfile();
+    Provider.of<FriendsProvider>(context, listen: false).clearFriends();
 
     // Navigate back to the login screen
     Navigator.of(context).pushReplacementNamed('/sign-in');

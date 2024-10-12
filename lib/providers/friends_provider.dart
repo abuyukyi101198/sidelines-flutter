@@ -10,4 +10,9 @@ class FriendsProvider with ChangeNotifier {
     _friends = friends;
     notifyListeners();
   }
+
+  void clearFriends() {
+    _friends = [];
+    notifyListeners();
+  }
 }
