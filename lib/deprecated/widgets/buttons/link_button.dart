@@ -4,8 +4,9 @@ import '../../utils/color_palette.dart';
 class LinkButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String label;
+  final double? fontSize;
 
-  const LinkButton({super.key, required this.onPressed, required this.label});
+  const LinkButton({super.key, required this.onPressed, required this.label, this.fontSize = 12.0});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,10 @@ class LinkButton extends StatelessWidget {
         }),
       ),
       child: Text(label,
-          style: const TextStyle(
+          style: TextStyle(
             color: ColorPalette.primaryColor,
             fontFamily: 'Sharp Grotesk',
-            fontSize: 12,
+            fontSize: fontSize,
             fontWeight: FontWeight.w700,
           )),
     );

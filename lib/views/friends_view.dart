@@ -87,15 +87,18 @@ class FriendsViewState extends State<FriendsView> {
               color: GlobalTheme.colors.primaryColor,
               backgroundColor: GlobalTheme.colors.backgroundColor,
               onRefresh: _refreshFriends,
-              child: ListView.builder(
-                itemCount: friends.length,
-                itemBuilder: (context, index) {
-                  ProfileModel friend = friends[index];
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 16.0, right: 8.0),
+                child: ListView.builder(
+                  itemCount: friends.length,
+                  itemBuilder: (context, index) {
+                    ProfileModel friend = friends[index];
 
-                  return FriendListItem(
-                    profileModel: friend,
-                  );
-                },
+                    return FriendListItem(
+                      profileModel: friend,
+                    );
+                  },
+                ),
               ),
             ),
           );
