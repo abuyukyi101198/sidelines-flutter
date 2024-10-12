@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sidelines/widgets/fields/search_field.dart';
 import 'package:sidelines/widgets/items/friend_list_item.dart';
 import '../data/theme.dart';
 import '../providers/friends_provider.dart';
@@ -17,6 +18,9 @@ class FriendsView extends StatefulWidget {
 class FriendsViewState extends State<FriendsView> {
   late FriendsViewModel friendsViewModel;
   late Future<void> _friendsFuture;
+  String searchQuery = "";
+  bool isSearching = false;
+  Future<void>? _searchFuture;
 
   @override
   void initState() {
@@ -42,6 +46,27 @@ class FriendsViewState extends State<FriendsView> {
     });
   }
 
+  void _startSearch() {
+    setState(() {
+      isSearching = true;
+    });
+  }
+
+  void _stopSearch() {
+    setState(() {
+      isSearching = false;
+      searchQuery = "";
+      _searchFuture = null; // Clear search results when search is canceled
+    });
+  }
+
+  void _searchFriends(String query) {
+    setState(() {
+      searchQuery = query;
+      _searchFuture = friendsViewModel.searchProfiles(searchQuery);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final friendsProvider = Provider.of<FriendsProvider>(context);
@@ -49,13 +74,40 @@ class FriendsViewState extends State<FriendsView> {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
-        title: const Text(
-          'Friends',
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
-        ),
+        title: !isSearching
+            ? const Text(
+                'Friends',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              )
+            : SearchField(
+                onChanged: _searchFriends,
+              ),
+        actions: !isSearching
+            ? [
+                Padding(
+                  padding: const EdgeInsets.only(right: 6.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: _startSearch,
+                  ),
+                ),
+              ]
+            : [
+                Padding(
+                  padding: const EdgeInsets.only(right: 6.0),
+                  child: TextButton(
+                    onPressed: _stopSearch,
+                    child: Text(
+                      'Cancel',
+                      style:
+                          TextStyle(color: GlobalTheme.colors.secondaryColor),
+                    ),
+                  ),
+                ),
+              ],
       ),
       body: FutureBuilder(
-        future: _friendsFuture,
+        future: isSearching ? _searchFuture : _friendsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -77,7 +129,9 @@ class FriendsViewState extends State<FriendsView> {
             );
           }
 
-          final friends = friendsProvider.friends;
+          final friends = isSearching
+              ? friendsProvider.searchResults
+              : friendsProvider.friends;
 
           return SafeArea(
             minimum: const EdgeInsets.symmetric(horizontal: 20.0),

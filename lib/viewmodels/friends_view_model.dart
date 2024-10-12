@@ -35,4 +35,23 @@ class FriendsViewModel {
       rethrow;
     }
   }
+
+  Future<void> searchProfiles(String query) async {
+    final token = await Storage().read('token');
+    final response = await http.get(
+      Uri.parse('${Constants.baseApiUrl}profile/search/?query=$query'),
+      headers: {'Authorization': 'Token $token'},
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(utf8.decode(response.bodyBytes));
+      List<ProfileModel> results = data
+          .map((json) => ProfileModel.fromJson(json))
+          .toList();
+
+      _friendsProvider.setSearchResults(results);
+    } else {
+      throw Exception('Failed to load profiles');
+    }
+  }
 }

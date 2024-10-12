@@ -25,6 +25,7 @@ class SearchField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
+          autofocus: true,
           style: fieldStyle,
           cursorColor: GlobalTheme.colors.textColor,
           decoration: decoration,
