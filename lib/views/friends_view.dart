@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sidelines/views/profile_search_view.dart';
 import 'package:sidelines/widgets/items/friend_list_item.dart';
 import '../data/theme.dart';
 import '../providers/friends_provider.dart';
@@ -59,48 +60,77 @@ class FriendsViewState extends State<FriendsView> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-                child: CircularProgressIndicator(
-              backgroundColor: GlobalTheme.colors.secondaryColor,
-              color: GlobalTheme.colors.primaryColor,
-            ));
+              child: CircularProgressIndicator(
+                backgroundColor: GlobalTheme.colors.secondaryColor,
+                color: GlobalTheme.colors.primaryColor,
+              ),
+            );
           } else if (snapshot.hasError) {
             return Center(
-                child: IconButton(
-              onPressed: _refreshFriends,
-              icon: Icon(
-                Icons.refresh_rounded,
-                color: GlobalTheme.colors.primaryColor,
-                size: 36.0,
+              child: IconButton(
+                onPressed: _refreshFriends,
+                icon: Icon(
+                  Icons.refresh_rounded,
+                  color: GlobalTheme.colors.primaryColor,
+                  size: 36.0,
+                ),
               ),
-            ));
+            );
           }
 
           final friends = friendsProvider.friends;
 
-          if (friends.isEmpty) {
-            return const Center(child: Text('No friends found.'));
-          }
+          return Stack(
+            children: [
+              SafeArea(
+                minimum: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: RefreshIndicator(
+                  color: GlobalTheme.colors.primaryColor,
+                  backgroundColor: GlobalTheme.colors.backgroundColor,
+                  onRefresh: _refreshFriends,
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.only(left: 8.0, top: 16.0, right: 8.0),
+                    itemCount: friends.isEmpty ? 1 : friends.length,
+                    itemBuilder: (context, index) {
+                      if (friends.isEmpty) {
+                        return Center(
+                          child: Text(
+                            'No friends found.',
+                            style: TextStyle(
+                              color: GlobalTheme.colors.primaryColor,
+                            ),
+                          ),
+                        );
+                      }
 
-          return SafeArea(
-            minimum: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: RefreshIndicator(
-              color: GlobalTheme.colors.primaryColor,
-              backgroundColor: GlobalTheme.colors.backgroundColor,
-              onRefresh: _refreshFriends,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 16.0, right: 8.0),
-                child: ListView.builder(
-                  itemCount: friends.length,
-                  itemBuilder: (context, index) {
-                    ProfileModel friend = friends[index];
-
-                    return FriendListItem(
-                      profileModel: friend,
-                    );
-                  },
+                      ProfileModel friend = friends[index];
+                      return FriendListItem(
+                        profileModel: friend,
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
+              Positioned(
+                bottom: 20.0, // Adjust the distance from the bottom
+                left: 20.0,
+                right: 20.0,
+                child: SizedBox(
+                  width: double.infinity, // Ensure button spans full width
+                  child: FilledButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileSearchView()),
+                      );
+                    },
+                    child: const Text('Add a Friend'),
+                  ),
+                ),
+              ),
+            ],
           );
         },
       ),
