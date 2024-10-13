@@ -7,37 +7,32 @@ import 'package:sidelines/widgets/displays/profile_info_display.dart';
 import 'package:sidelines/widgets/displays/profile_performance_chart.dart';
 import 'package:sidelines/widgets/displays/profile_statistics_display.dart';
 import '../data/storage.dart';
+import '../models/profile_model.dart';
 import '../providers/profile_provider.dart';
 import '../viewmodels/profile_view_model.dart';
 import '../widgets/navigation/screen_navigation_bar.dart';
 
 class ProfileView extends StatefulWidget {
-  final int? profileId;
-
-  const ProfileView({super.key, this.profileId});
+  const ProfileView({super.key});
 
   @override
   ProfileViewState createState() => ProfileViewState();
 }
 
 class ProfileViewState extends State<ProfileView> {
+  late ProfileProvider profileProvider;
   late ProfileViewModel profileViewModel;
   late Future<void> _profileFuture;
 
   @override
   void initState() {
     super.initState();
-    final profileProvider =
-        Provider.of<ProfileProvider>(context, listen: false);
+    profileProvider = Provider.of<ProfileProvider>(context, listen: false);
     profileViewModel = ProfileViewModel(profileProvider);
     _profileFuture = Future.value();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.profileId != null) {
-        setState(() {
-          _profileFuture = profileViewModel.fetchProfileById(widget.profileId!);
-        });
-      } else if (!profileProvider.currentProfile!.isProfileComplete) {
+      if (!profileProvider.profile!.isProfileComplete) {
         setState(() {
           _profileFuture = profileViewModel.fetchProfile();
         });
@@ -62,23 +57,20 @@ class ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    final profileProvider = Provider.of<ProfileProvider>(context);
-    final List<Widget>? actions = widget.profileId == null
-        ? [
-            Padding(
-              padding: const EdgeInsets.only(right: 6.0),
-              child: IconButton(
-                onPressed: _logout,
-                icon: const Icon(Icons.logout_rounded),
-              ),
-            ),
-          ]
-        : null;
+    ProfileModel profile = profileProvider.profile as ProfileModel;
 
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        actions: actions,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 6.0),
+            child: IconButton(
+              onPressed: _logout,
+              icon: const Icon(Icons.logout_rounded),
+            ),
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: _profileFuture,
@@ -101,10 +93,6 @@ class ProfileViewState extends State<ProfileView> {
             ));
           }
 
-          final displayedProfile = widget.profileId != null
-              ? profileProvider.viewedProfile
-              : profileProvider.currentProfile;
-
           return SafeArea(
               minimum: const EdgeInsets.symmetric(horizontal: 20.0),
               child: RefreshIndicator(
@@ -113,9 +101,9 @@ class ProfileViewState extends State<ProfileView> {
                 onRefresh: _refreshProfile,
                 child: ListView(
                   children: [
-                    ProfileHeader(profileModel: displayedProfile!),
-                    ProfileInfoDisplay(profileModel: displayedProfile),
-                    ProfileStatisticsDisplay(profileModel: displayedProfile),
+                    ProfileHeader(profileModel: profile),
+                    ProfileInfoDisplay(profileModel: profile),
+                    ProfileStatisticsDisplay(profileModel: profile),
                     const SizedBox(height: 24.0),
                     const ProfilePerformanceChart(
                       ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
@@ -125,8 +113,7 @@ class ProfileViewState extends State<ProfileView> {
               ));
         },
       ),
-      bottomNavigationBar:
-          ScreenNavigationBar(currentIndex: widget.profileId != null ? 3 : 4),
+      bottomNavigationBar: const ScreenNavigationBar(currentIndex: 4),
     );
   }
 }

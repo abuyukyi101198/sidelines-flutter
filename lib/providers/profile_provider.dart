@@ -3,43 +3,35 @@ import 'package:flutter/material.dart';
 import '../models/profile_model.dart';
 
 class ProfileProvider with ChangeNotifier {
-  ProfileModel? _currentProfile;
-  ProfileModel? _viewedProfile;
+  ProfileModel? _profile;
 
-  ProfileModel? get currentProfile => _currentProfile;
-  ProfileModel? get viewedProfile => _viewedProfile;
+  ProfileModel? get profile => _profile;
 
-  void setCurrentProfile(ProfileModel profile) {
-    _currentProfile = profile;
-    notifyListeners();
-  }
-
-  void setViewedProfile(ProfileModel profile) {
-    _viewedProfile = profile;
+  void setProfile(ProfileModel profile) {
+    _profile = profile;
     notifyListeners();
   }
 
   void setProfilePictureUrl(String url) {
-    _currentProfile = ProfileModel(
-      overallRating: _currentProfile?.overallRating,
+    _profile = ProfileModel(
+      overallRating: _profile?.overallRating,
       profilePictureUrl: url,
-      firstName: _currentProfile?.firstName,
-      lastName: _currentProfile?.lastName,
-      username: _currentProfile?.username,
-      positions: _currentProfile?.positions,
-      kitNumber: _currentProfile?.kitNumber,
-      goals: _currentProfile?.goals,
-      assists: _currentProfile?.assists,
-      mvp: _currentProfile?.mvp,
-      dateOfBirth: _currentProfile?.dateOfBirth,
-      joinDate: _currentProfile?.joinDate,
+      firstName: _profile?.firstName,
+      lastName: _profile?.lastName,
+      username: _profile?.username,
+      positions: _profile?.positions,
+      kitNumber: _profile?.kitNumber,
+      goals: _profile?.goals,
+      assists: _profile?.assists,
+      mvp: _profile?.mvp,
+      dateOfBirth: _profile?.dateOfBirth,
+      joinDate: _profile?.joinDate,
     );
     notifyListeners();
   }
 
   void clearProfile() {
-    _currentProfile = null;
-    _viewedProfile = null;
+    _profile = null;
     notifyListeners();
   }
 }

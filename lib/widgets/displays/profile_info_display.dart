@@ -15,7 +15,7 @@ class ProfileInfoDisplay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ProfileInfoBadge(
-                type: 'position', data: profileModel.formatPosition()),
+                type: 'position', data: profileModel.formattedPosition),
             const SizedBox(
               width: 12.0,
             ),
@@ -33,11 +33,11 @@ class ProfileInfoDisplay extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ProfileInfoBadge(type: 'age', data: profileModel.calculateAge()),
+            ProfileInfoBadge(type: 'age', data: profileModel.age),
             const SizedBox(
               width: 12.0,
             ),
-            ProfileInfoBadge(type: 'join', data: profileModel.formatJoinDate()),
+            ProfileInfoBadge(type: 'join', data: profileModel.formattedJoinDate),
           ],
         ),
         const SizedBox(
