@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sidelines/data/theme.dart';
-import '../../widgets/fields/date_field.dart';
-import '../widgets/fields/labeled_text_field.dart';
+import '../../../widgets/fields/date_field.dart';
+import '../../widgets/fields/labeled_text_field.dart';
 
 class PersonalInfoView extends StatelessWidget {
   final TextEditingController firstNameController;

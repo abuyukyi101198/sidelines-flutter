@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/material/colors.dart' as clr;
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/models/setup_journey_model.dart';
-import 'package:sidelines/views/personal_info_view.dart';
-import 'package:sidelines/views/player_info_view.dart';
-import 'package:sidelines/views/profile_picture_and_username_view.dart';
-import 'package:sidelines/views/welcome_view.dart';
+import 'package:sidelines/views/setup/personal_info_view.dart';
+import 'package:sidelines/views/setup/player_info_view.dart';
+import 'package:sidelines/views/setup/profile_picture_and_username_view.dart';
+import 'package:sidelines/views/setup/welcome_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../exceptions/runtime_exception.dart';
-import '../viewmodels/setup_journey_view_model.dart';
-import '../widgets/footers/setup_journey_footer.dart';
-import '../widgets/notifications/notification_bar.dart';
+import '../../exceptions/runtime_exception.dart';
+import '../../viewmodels/setup_journey_view_model.dart';
+import '../../widgets/footers/setup_journey_footer.dart';
+import '../../widgets/notifications/notification_bar.dart';
 
 class SetupJourneyView extends StatefulWidget {
   const SetupJourneyView({super.key});

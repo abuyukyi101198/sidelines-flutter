@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/widgets/visuals/sidelines_logo.dart';
 
-import '../services/auth_service.dart';
+import '../../services/auth_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

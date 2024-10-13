@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sidelines/data/theme.dart';
-import '../widgets/fields/labeled_text_field.dart';
+import '../../widgets/fields/labeled_text_field.dart';
 
 class ProfilePictureAndUsernameView extends StatefulWidget {
   final TextEditingController usernameController;

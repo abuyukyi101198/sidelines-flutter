@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/providers/friends_provider.dart';
 import 'package:sidelines/providers/profile_provider.dart';
+import 'package:sidelines/views/authentication/sign_up_view.dart';
+import 'package:sidelines/views/authentication/splash_screen_view.dart';
 import 'package:sidelines/views/friends_view.dart';
 import 'package:sidelines/views/profile_view.dart';
-import 'package:sidelines/views/setup_journey_view.dart';
-import 'package:sidelines/views/sign_in_view.dart';
-import 'package:sidelines/views/sign_up_view.dart';
-import 'package:sidelines/views/splash_screen_view.dart';
+import 'package:sidelines/views/setup/setup_journey_view.dart';
+import 'package:sidelines/views/authentication/sign_in_view.dart';
 
 import 'deprecated/screens/matches_screen.dart';
 

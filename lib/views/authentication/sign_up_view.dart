@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sidelines/models/sign_in_model.dart';
-import 'package:sidelines/widgets/buttons/link_button.dart';
-import 'package:sidelines/widgets/fields/labeled_text_field.dart';
-import 'package:sidelines/widgets/footers/auth_footer.dart';
-import 'package:sidelines/widgets/visuals/sidelines_logo.dart';
+import 'package:sidelines/models/sign_up_model.dart';
+import 'package:sidelines/viewmodels/sign_up_view_model.dart';
 
-import '../viewmodels/sign_in_view_model.dart';
+import '../../widgets/fields/labeled_text_field.dart';
+import '../../widgets/footers/auth_footer.dart';
+import '../../widgets/visuals/sidelines_logo.dart';
 
-class SignInView extends StatelessWidget {
-  final SignInViewModel viewModel = SignInViewModel();
+class SignUpView extends StatelessWidget {
+  final SignUpViewModel viewModel = SignUpViewModel();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
-  SignInView({super.key});
+  SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,40 +32,39 @@ class SignInView extends StatelessWidget {
                 width: 128.0,
               ),
               LabeledTextField(
-                label: 'Username/E-mail',
+                label: 'Your e-mail address',
                 controller: emailController,
                 textInputType: TextInputType.emailAddress,
               ),
               LabeledTextField(
-                label: 'Password',
+                label: 'Enter a password',
                 controller: passwordController,
                 textInputType: TextInputType.visiblePassword,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 8.0, bottom: 8.0),
-                  child: LinkButton(
-                    onPressed: () {},
-                    label: 'Forgot password?',
-                  ),
-                ),
+              LabeledTextField(
+                label: 'Re-enter your password',
+                controller: confirmPasswordController,
+                textInputType: TextInputType.visiblePassword,
+              ),
+              const SizedBox(
+                height: 12.0,
               ),
               FilledButton(
                 onPressed: () {
-                  SignInModel signInModel = SignInModel(
-                      usernameOrEmail: emailController.text,
-                      password: passwordController.text);
-                  viewModel.signIn(context, signInModel);
+                  SignUpModel signUpModel = SignUpModel(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      confirmPassword: confirmPasswordController.text);
+                  viewModel.signUp(context, signUpModel);
                 },
-                child: const Text('Sign in'),
+                child: const Text('Sign up'),
               ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: const AuthFooter(
-        isSignIn: true,
+        isSignIn: false,
       ),
     );
   }
