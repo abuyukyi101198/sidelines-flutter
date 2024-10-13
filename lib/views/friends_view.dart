@@ -68,6 +68,7 @@ class FriendsViewState extends State<FriendsView> {
     });
   }
 
+  // TODO: Separate view for other profiles
   @override
   Widget build(BuildContext context) {
     final friendsProvider = Provider.of<FriendsProvider>(context);
