@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/providers/friends_provider.dart';
+import 'package:sidelines/views/refreshable_view.dart';
 import 'package:sidelines/widgets/displays/profile_header.dart';
 import 'package:sidelines/widgets/displays/profile_info_display.dart';
 import 'package:sidelines/widgets/displays/profile_performance_chart.dart';
@@ -72,46 +72,20 @@ class ProfileViewState extends State<ProfileView> {
           ),
         ],
       ),
-      body: FutureBuilder(
+      body: RefreshableView(
         future: _profileFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-                child: CircularProgressIndicator(
-              backgroundColor: GlobalTheme.colors.secondaryColor,
-              color: GlobalTheme.colors.primaryColor,
-            ));
-          } else if (snapshot.hasError) {
-            return Center(
-                child: IconButton(
-              onPressed: _refreshProfile,
-              icon: Icon(
-                Icons.refresh_rounded,
-                color: GlobalTheme.colors.primaryColor,
-                size: 36.0,
-              ),
-            ));
-          }
-
-          return SafeArea(
-              minimum: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: RefreshIndicator(
-                color: GlobalTheme.colors.primaryColor,
-                backgroundColor: GlobalTheme.colors.backgroundColor,
-                onRefresh: _refreshProfile,
-                child: ListView(
-                  children: [
-                    ProfileHeader(profileModel: profile),
-                    ProfileInfoDisplay(profileModel: profile),
-                    ProfileStatisticsDisplay(profileModel: profile),
-                    const SizedBox(height: 24.0),
-                    const ProfilePerformanceChart(
-                      ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
-                    ),
-                  ],
-                ),
-              ));
-        },
+        onRefresh: _refreshProfile,
+        child: ListView(
+          children: [
+            ProfileHeader(profileModel: profile),
+            ProfileInfoDisplay(profileModel: profile),
+            ProfileStatisticsDisplay(profileModel: profile),
+            const SizedBox(height: 24.0),
+            const ProfilePerformanceChart(
+              ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: const ScreenNavigationBar(currentIndex: 4),
     );
