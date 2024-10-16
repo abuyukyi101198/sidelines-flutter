@@ -83,6 +83,16 @@ class OtherProfileViewState extends State<OtherProfileView> {
                 ],
               ),
             );
+          } else {
+            return Center(
+              child: Text(
+                "Profile not found",
+                style: TextStyle(
+                  color: GlobalTheme.colors.errorColor,
+                  fontSize: 18.0,
+                ),
+              ),
+            );
           }
         },
       ),
