@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/views/other_profile_view.dart';
 import 'package:sidelines/widgets/badges/friend_badge.dart';
 import '../../data/theme.dart';
 import '../../models/profile_model.dart';
@@ -78,11 +79,11 @@ class FriendListItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => ProfileView(profileId: profileModel.id),
-        //   ),
-        // );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => OtherProfileView(id: profileModel.id!),
+          ),
+        );
       },
     );
   }
