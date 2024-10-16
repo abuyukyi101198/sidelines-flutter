@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 class ProfileModel {
   //region variables
+  int? _id;
   double? _overallRating;
   String? _profilePictureUrl;
   String? _firstName;
@@ -17,6 +18,7 @@ class ProfileModel {
   //endregion
 
   //region getters
+  int? get id => _id;
   double? get overallRating => _overallRating;
   String? get profilePictureUrl => _profilePictureUrl;
   String? get firstName => _firstName;
@@ -80,6 +82,7 @@ class ProfileModel {
   //endregion
 
   ProfileModel({
+    int? id,
     double? overallRating,
     String? profilePictureUrl,
     String? firstName,
@@ -93,6 +96,7 @@ class ProfileModel {
     int? assists,
     int? mvp,
   }) {
+    _id = id;
     _overallRating = overallRating;
     _profilePictureUrl = profilePictureUrl;
     _firstName = firstName;
@@ -109,6 +113,7 @@ class ProfileModel {
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
+      id: json['id'] as int?,
       overallRating: json['overall_rating'] as double?,
       profilePictureUrl: json['profile_picture'] as String?,
       firstName: json['first_name'] as String?,

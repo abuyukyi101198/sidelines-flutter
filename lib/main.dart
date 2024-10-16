@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/data/theme.dart';
 import 'package:sidelines/providers/friends_provider.dart';
+import 'package:sidelines/providers/other_profile_provider.dart';
 import 'package:sidelines/providers/profile_provider.dart';
 import 'package:sidelines/views/authentication/sign_up_view.dart';
 import 'package:sidelines/views/authentication/splash_screen_view.dart';
@@ -18,14 +19,39 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => FriendsProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => OtherProfileProvider()),
       ],
       child: const MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.detached || state == AppLifecycleState.paused) {
+      Provider.of<OtherProfileProvider>(context, listen: false).clearCache();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
