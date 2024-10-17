@@ -15,10 +15,10 @@ class FriendListItem extends StatelessWidget {
       FriendBadge(label: profileModel.formattedPosition),
     ];
 
-    // if (profileModel.isTeammate != null && profileModel.isTeammate!) {
-    //   badges.add(const SizedBox(width: 4.0));
-    //   badges.add(FriendBadge(label: 'Teammate'));
-    // }
+    if (profileModel.isTeammate != null && profileModel.isTeammate!) {
+      badges.add(const SizedBox(width: 4.0));
+      badges.add(FriendBadge(label: 'Teammate'));
+    }
 
     return GestureDetector(
       child: Container(

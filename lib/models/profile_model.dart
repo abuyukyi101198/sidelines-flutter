@@ -15,22 +15,39 @@ class ProfileModel {
   int? _goals;
   int? _assists;
   int? _mvp;
+  bool? _isTeammate;
+
   //endregion
 
   //region getters
   int? get id => _id;
+
   double? get overallRating => _overallRating;
+
   String? get profilePictureUrl => _profilePictureUrl;
+
   String? get firstName => _firstName;
+
   String? get lastName => _lastName;
+
   String? get username => _username;
+
   List<String>? get positions => _positions;
+
   String? get joinDate => _joinDate;
+
   String? get dateOfBirth => _dateOfBirth;
+
   int? get kitNumber => _kitNumber;
+
   int? get goals => _goals;
+
   int? get assists => _assists;
+
   int? get mvp => _mvp;
+
+  bool? get isTeammate => _isTeammate;
+
   String get formattedPosition {
     if (_positions == null || _positions!.isEmpty) return 'N/A';
     const positionCategories = {
@@ -44,14 +61,14 @@ class ProfileModel {
       'GK': 'Goalkeeper',
     };
 
-    Set<String?> categories = _positions
-        ?.map((pos) => positionCategories[pos] ?? pos)
-        .toSet() ?? {};
+    Set<String?> categories =
+        _positions?.map((pos) => positionCategories[pos] ?? pos).toSet() ?? {};
 
     return categories.contains('GK')
         ? 'Goalkeeper'
         : (categories.length > 1 ? 'Versatile' : categories.first ?? 'N/A');
   }
+
   String get formattedJoinDate {
     if (_joinDate == null) return 'N/A';
     DateTime parsedDate = DateTime.parse(_joinDate!);
@@ -59,12 +76,14 @@ class ProfileModel {
     int day = parsedDate.day;
     return "$formattedDate${_getDaySuffix(day)}, ${parsedDate.year}";
   }
+
   String get age {
     if (_dateOfBirth == null) return 'N/A';
     final dob = DateTime.parse(_dateOfBirth!);
     final today = DateTime.now();
     return (today.year - dob.year).toString();
   }
+
   bool get isProfileComplete {
     return _overallRating != null &&
         _profilePictureUrl != null &&
@@ -79,6 +98,7 @@ class ProfileModel {
         _assists != null &&
         _mvp != null;
   }
+
   //endregion
 
   ProfileModel({
@@ -95,6 +115,7 @@ class ProfileModel {
     int? goals,
     int? assists,
     int? mvp,
+    bool? isTeammate,
   }) {
     _id = id;
     _overallRating = overallRating;
@@ -109,6 +130,7 @@ class ProfileModel {
     _goals = goals;
     _assists = assists;
     _mvp = mvp;
+    _isTeammate = isTeammate;
   }
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -128,6 +150,7 @@ class ProfileModel {
       goals: json['goals'] as int?,
       assists: json['assists'] as int?,
       mvp: json['mvp'] as int?,
+      isTeammate: json['is_teammate'] as bool?,
     );
   }
 
