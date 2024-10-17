@@ -9,9 +9,9 @@ class GlobalTheme {
 class Colors {
   const Colors();
   Color get primaryColor => const Color.fromRGBO(224, 245, 115, 1);
-  Color get secondaryColor => const Color.fromRGBO(54, 54, 54, 1);
+  Color get secondaryColor => const Color.fromRGBO(64, 64, 64, 1);
 
-  Color get textColor => const Color.fromRGBO(255, 255, 255, 1);
+  Color get textColor => const Color.fromRGBO(220, 220, 220, 1);
 
   Color get backgroundColor => const Color.fromRGBO(25, 23, 23, 1);
 
