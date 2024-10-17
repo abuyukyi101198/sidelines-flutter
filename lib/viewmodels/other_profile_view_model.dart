@@ -37,4 +37,31 @@ class OtherProfileViewModel {
       return Future.error(error);
     }
   }
+
+  Future<ProfileModel> sendFriendRequestToProfile(int id) async {
+    try {
+      final token = await Storage().read('token');
+      final response = await http.post(
+        Uri.parse('${Constants.baseApiUrl}friend-requests/'),
+        headers: {
+          'Authorization': 'Token $token',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode({'to_profile': id}),
+      );
+
+      if (response.statusCode == 201) {
+        final data = json.decode(utf8.decode(response.bodyBytes));
+
+        ProfileModel profile = ProfileModel.fromJson(data);
+
+        _profileProvider.cacheProfile(id, profile);
+        return profile;
+      } else {
+        throw ApiException(response);
+      }
+    } catch (error) {
+      return Future.error(error);
+    }
+  }
 }
