@@ -78,7 +78,7 @@ class FriendsViewState extends State<FriendsView> {
         scrolledUnderElevation: 0.0,
         title: !isSearching
             ? const Text(
-                'Friends',
+                'Network',
                 style: TextStyle(fontWeight: FontWeight.w700),
               )
             : SearchField(

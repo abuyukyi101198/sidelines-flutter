@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidelines/models/profile_model.dart';
+import 'package:sidelines/widgets/displays/other_profile_action_display.dart';
+import 'package:sidelines/widgets/navigation/screen_navigation_bar.dart';
 
 import '../data/theme.dart';
 import '../providers/other_profile_provider.dart';
@@ -74,6 +76,7 @@ class OtherProfileViewState extends State<OtherProfileView> {
               child: ListView(
                 children: [
                   ProfileHeader(profileModel: profile),
+                  OtherProfileActionDisplay(isConnected: true,),
                   ProfileInfoDisplay(profileModel: profile),
                   ProfileStatisticsDisplay(profileModel: profile),
                   const SizedBox(height: 24.0),
@@ -95,6 +98,9 @@ class OtherProfileViewState extends State<OtherProfileView> {
             );
           }
         },
+      ),
+      bottomNavigationBar: const ScreenNavigationBar(
+        currentIndex: 3,
       ),
     );
   }
