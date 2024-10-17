@@ -21,6 +21,7 @@ class FriendListItem extends StatelessWidget {
     }
 
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(vertical: 8.0),
