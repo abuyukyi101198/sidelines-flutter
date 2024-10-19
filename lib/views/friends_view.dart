@@ -17,6 +17,7 @@ class FriendsView extends StatefulWidget {
 
 class FriendsViewState extends State<FriendsView> {
   late FriendsViewModel friendsViewModel;
+  late FriendsProvider friendsProvider;
   late Future<void> _friendsFuture;
   Future<void>? _searchFuture;
 
@@ -26,7 +27,7 @@ class FriendsViewState extends State<FriendsView> {
   @override
   void initState() {
     super.initState();
-    final friendsProvider =
+    friendsProvider =
         Provider.of<FriendsProvider>(context, listen: false);
     friendsViewModel = FriendsViewModel(friendsProvider);
     _friendsFuture = Future.value();
@@ -58,6 +59,7 @@ class FriendsViewState extends State<FriendsView> {
       isSearching = false;
       searchQuery = "";
       _searchFuture = null;
+      friendsProvider.setSearchResults([]);
     });
   }
 
@@ -68,11 +70,8 @@ class FriendsViewState extends State<FriendsView> {
     });
   }
 
-  // TODO: Separate view for other profiles
   @override
   Widget build(BuildContext context) {
-    final friendsProvider = Provider.of<FriendsProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
