@@ -76,7 +76,7 @@ class OtherProfileViewState extends State<OtherProfileView> {
               child: ListView(
                 children: [
                   ProfileHeader(profileModel: profile),
-                  OtherProfileActionDisplay(isConnected: true,),
+                  OtherProfileActionDisplay(profileModel: profile,),
                   ProfileInfoDisplay(profileModel: profile),
                   ProfileStatisticsDisplay(profileModel: profile),
                   const SizedBox(height: 24.0),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:sidelines/models/profile_model.dart';
 
 import '../../data/theme.dart';
 
 class OtherProfileActionDisplay extends StatelessWidget {
-  final bool isConnected;
+  final ProfileModel profileModel;
 
-  const OtherProfileActionDisplay({super.key, required this.isConnected});
+  const OtherProfileActionDisplay({super.key, required this.profileModel});
 
   @override
   Widget build(BuildContext context) {
+    final bool isConnected = profileModel.isConnected!;
     final String label = isConnected ? 'Connected' : 'Connect';
     final Icon? icon =
         isConnected ? const Icon(Icons.check_rounded, size: 16.0) : null;
