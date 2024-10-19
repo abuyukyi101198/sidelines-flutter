@@ -37,7 +37,20 @@ class OtherProfileViewState extends State<OtherProfileView> {
 
   Future<void> _refreshProfile() async {
     setState(() {
-      _profileFuture = otherProfileViewModel.fetchProfile(widget.id);
+      _profileFuture =
+          otherProfileViewModel.fetchProfile(widget.id, force: true);
+    });
+  }
+
+  Future<void> _sendConnectionRequest() async {
+    setState(() {
+      _profileFuture = otherProfileViewModel.sendFriendRequestToProfile(widget.id);
+    });
+  }
+
+  Future<void> _unfriendProfile() async {
+    setState(() {
+      _profileFuture = otherProfileViewModel.unfriendProfile(widget.id);
     });
   }
 
@@ -73,17 +86,26 @@ class OtherProfileViewState extends State<OtherProfileView> {
 
             return SafeArea(
               minimum: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListView(
-                children: [
-                  ProfileHeader(profileModel: profile),
-                  OtherProfileActionDisplay(profileModel: profile,),
-                  ProfileInfoDisplay(profileModel: profile),
-                  ProfileStatisticsDisplay(profileModel: profile),
-                  const SizedBox(height: 24.0),
-                  const ProfilePerformanceChart(
-                    ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
-                  ),
-                ],
+              child: RefreshIndicator(
+                color: GlobalTheme.colors.primaryColor,
+                backgroundColor: GlobalTheme.colors.backgroundColor,
+                onRefresh: _refreshProfile,
+                child: ListView(
+                  children: [
+                    ProfileHeader(profileModel: profile),
+                    OtherProfileActionDisplay(
+                      profileModel: profile,
+                      sendRequest: _sendConnectionRequest, // Trigger profile update directly
+                      unfriend: _unfriendProfile, // Show confirmation dialog before unfriending
+                    ),
+                    ProfileInfoDisplay(profileModel: profile),
+                    ProfileStatisticsDisplay(profileModel: profile),
+                    const SizedBox(height: 24.0),
+                    const ProfilePerformanceChart(
+                      ratings: [6.4, 7.6, 7.2, 8.3, 9.1, 7.1],
+                    ),
+                  ],
+                ),
               ),
             );
           } else {
