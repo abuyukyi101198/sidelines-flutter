@@ -11,8 +11,8 @@ class OtherProfileViewModel {
 
   OtherProfileViewModel(this._profileProvider);
 
-  Future<ProfileModel> fetchProfile(int id) async {
-    if (_profileProvider.isProfileCached(id)) {
+  Future<ProfileModel> fetchProfile(int id, {bool force = false}) async {
+    if (_profileProvider.isProfileCached(id) & !force) {
       return _profileProvider.getCachedProfile(id)!;
     }
 
@@ -51,10 +51,32 @@ class OtherProfileViewModel {
       );
 
       if (response.statusCode == 201) {
-        final data = json.decode(utf8.decode(response.bodyBytes));
+        ProfileModel profile = _profileProvider.getCachedProfile(id)!;
+        profile.connection = 'pending';
+        _profileProvider.cacheProfile(id, profile);
+        return profile;
+      } else {
+        throw ApiException(response);
+      }
+    } catch (error) {
+      return Future.error(error);
+    }
+  }
 
-        ProfileModel profile = ProfileModel.fromJson(data);
+  Future<ProfileModel> unfriendProfile(int id) async {
+    try {
+      final token = await Storage().read('token');
+      final response = await http.delete(
+        Uri.parse('${Constants.baseApiUrl}friend-requests/unfriend/$id/'),
+        headers: {
+          'Authorization': 'Token $token',
+          'Content-Type': 'application/json'
+        },
+      );
 
+      if (response.statusCode == 200) {
+        ProfileModel profile = _profileProvider.getCachedProfile(id)!;
+        profile.connection = 'not connected';
         _profileProvider.cacheProfile(id, profile);
         return profile;
       } else {
