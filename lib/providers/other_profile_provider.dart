@@ -25,6 +25,11 @@ class OtherProfileProvider with ChangeNotifier {
       _cachedProfiles.remove(oldestUserId);
     }
     _cachedProfiles[id] = profile;
+
+    if (_cacheOrder.contains(id)) {
+      _cacheOrder.remove(id);
+    }
+
     _cacheOrder.add(id);
     notifyListeners();
   }
