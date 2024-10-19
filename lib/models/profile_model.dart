@@ -16,7 +16,7 @@ class ProfileModel {
   int? _assists;
   int? _mvp;
   bool? _isTeammate;
-  bool? _isConnected;
+  String? _connection;
 
   //endregion
 
@@ -49,7 +49,7 @@ class ProfileModel {
 
   bool? get isTeammate => _isTeammate;
 
-  bool? get isConnected => _isConnected;
+  String? get connection => _connection;
 
   String get formattedPosition {
     if (_positions == null || _positions!.isEmpty) return 'N/A';
@@ -104,6 +104,12 @@ class ProfileModel {
 
   //endregion
 
+  //region setters
+  set connection(String? connection) {
+    connection = connection;
+  }
+  //endregion
+
   ProfileModel({
     int? id,
     double? overallRating,
@@ -119,7 +125,7 @@ class ProfileModel {
     int? assists,
     int? mvp,
     bool? isTeammate,
-    bool? isConnected,
+    String? connection,
   }) {
     _id = id;
     _overallRating = overallRating;
@@ -135,7 +141,7 @@ class ProfileModel {
     _assists = assists;
     _mvp = mvp;
     _isTeammate = isTeammate;
-    _isConnected = isConnected;
+    _connection = connection;
   }
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -156,7 +162,7 @@ class ProfileModel {
       assists: json['assists'] as int?,
       mvp: json['mvp'] as int?,
       isTeammate: json['is_teammate'] as bool?,
-      isConnected: json['is_friends'] as bool?,
+      connection: json['is_friends'] as String?,
     );
   }
 
